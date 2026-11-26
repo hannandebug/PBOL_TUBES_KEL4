@@ -1,10 +1,7 @@
 package id.kelompok4.laundry.model;
 
-/**
- * Class Admin
- * Subclass dari Pengguna yang merepresentasikan peran Admin / Pemilik Laundry.
- * Menerapkan prinsip Inheritance dan Method Overriding.
- */
+// OOP: Inheritance - subclass ini mewarisi data dan perilaku dari Pengguna.
+// OOP: Polymorphism - perilaku peran disediakan melalui method overriding.
 public class Admin extends Pengguna {
 
     public Admin() {

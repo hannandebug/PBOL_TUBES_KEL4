@@ -9,10 +9,8 @@ import id.kelompok4.laundry.view.login.FormLogin;
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * DashboardPetugasFrame
- * Jendela kerja utama Petugas / Kasir Laundry.
- */
+// Fitur: Dashboard Petugas
+// OOP: Inheritance - DashboardPetugasFrame mewarisi JFrame.
 public class DashboardPetugasFrame extends JFrame {
 
     private final CardLayout cardLayout = new CardLayout();
@@ -70,6 +68,7 @@ public class DashboardPetugasFrame extends JFrame {
         setContentPane(root);
     }
 
+    // Fitur: Tambah Navigasi
     private void tambahNavigasi(SidebarNav sidebar, String menuLabel, String judulHeader, String cardName, Runnable onSelect) {
         sidebar.tambahMenu(menuLabel, () -> {
             cardLayout.show(pnlKonten, cardName);

@@ -13,10 +13,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
 
-/**
- * PanelKelolaPembatalanAdmin
- * Mengelola permohonan pembatalan dari pelanggan dan memantau status pengembalian dana.
- */
+// Fitur: Kelola Pembatalan dan Refund
+// OOP: Inheritance - PanelKelolaPembatalanAdmin mewarisi JPanel.
 public class PanelKelolaPembatalanAdmin extends JPanel {
 
     private final PembatalanRefundService service = new PembatalanRefundService();
@@ -44,7 +42,7 @@ public class PanelKelolaPembatalanAdmin extends JPanel {
         JTabbedPane tab = new JTabbedPane();
         tab.setFont(TemaWarna.FONT_BOLD);
 
-        // Tab 1: Permohonan Pembatalan
+        // Fitur: Kelola Pembatalan
         PanelKartu kartu1 = new PanelKartu(new BorderLayout(0, 14), 18);
         JPanel pnlAtas1 = new JPanel(new BorderLayout(0, 8));
         pnlAtas1.setOpaque(false);
@@ -73,7 +71,7 @@ public class PanelKelolaPembatalanAdmin extends JPanel {
         kartu1.add(TemaWarna.bungkusTabel(tabelBatal), BorderLayout.CENTER);
         tab.addTab("Pengajuan Pembatalan", kartu1);
 
-        // Tab 2: Monitoring Refund
+        // Fitur: Pantau Refund
         PanelKartu kartu2 = new PanelKartu(new BorderLayout(0, 14), 18);
         JPanel pnlAtas2 = new JPanel(new BorderLayout());
         pnlAtas2.setOpaque(false);
@@ -127,6 +125,7 @@ public class PanelKelolaPembatalanAdmin extends JPanel {
         }
     }
 
+    // Fitur: Proses Persetujuan
     private void prosesPersetujuan(boolean setuju) {
         int baris = tabelBatal.getSelectedRow();
         if (baris < 0) {

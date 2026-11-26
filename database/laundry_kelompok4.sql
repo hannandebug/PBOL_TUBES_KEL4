@@ -1,11 +1,3 @@
--- ============================================================================
--- DATABASE: laundry_kelompok4
--- PROYEK PBOL KELOMPOK 4
--- Sistem Informasi Manajemen Transaksi, Pengerjaan, dan Pengaduan Laundry
--- DBMS: MySQL 8.0.16 atau lebih baru
--- Charset: utf8mb4
--- ============================================================================
-
 CREATE DATABASE IF NOT EXISTS laundry_kelompok4
     CHARACTER SET utf8mb4
     COLLATE utf8mb4_unicode_ci;
@@ -14,9 +6,7 @@ USE laundry_kelompok4;
 SET NAMES utf8mb4;
 SET time_zone = '+07:00';
 
--- ============================================================================
--- 1. PENGGUNA
--- ============================================================================
+-- Fitur: Kelola Pengguna
 CREATE TABLE IF NOT EXISTS pengguna (
     id_pengguna BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     nama_lengkap VARCHAR(100) NOT NULL,
@@ -34,9 +24,7 @@ CREATE TABLE IF NOT EXISTS pengguna (
     INDEX idx_pengguna_peran_aktif (peran, status_aktif)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ============================================================================
--- 2. PELANGGAN
--- ============================================================================
+-- Fitur: Kelola Pelanggan
 CREATE TABLE IF NOT EXISTS pelanggan (
     id_pelanggan BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     id_pengguna BIGINT UNSIGNED NOT NULL,
@@ -55,9 +43,7 @@ CREATE TABLE IF NOT EXISTS pelanggan (
     INDEX idx_pelanggan_kode (kode_pelanggan)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ============================================================================
--- 3. JENIS LAYANAN
--- ============================================================================
+-- Fitur: Kelola Jenis Layanan
 CREATE TABLE IF NOT EXISTS jenis_layanan (
     id_jenis_layanan BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     kode_layanan VARCHAR(30) NOT NULL,
@@ -70,9 +56,7 @@ CREATE TABLE IF NOT EXISTS jenis_layanan (
     CONSTRAINT ck_jenis_layanan_aktif CHECK (status_aktif IN (0, 1))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ============================================================================
--- 4. PAKET LAUNDRY
--- ============================================================================
+-- Fitur: Kelola Paket Laundry
 CREATE TABLE IF NOT EXISTS paket_laundry (
     id_paket BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     kode_paket VARCHAR(30) NOT NULL,
@@ -87,9 +71,7 @@ CREATE TABLE IF NOT EXISTS paket_laundry (
     CONSTRAINT ck_paket_aktif CHECK (status_aktif IN (0, 1))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ============================================================================
--- 5. TARIF LAYANAN
--- ============================================================================
+-- Fitur: Kelola Tarif Layanan
 CREATE TABLE IF NOT EXISTS tarif_layanan (
     id_tarif BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     id_jenis_layanan BIGINT UNSIGNED NOT NULL,
@@ -110,9 +92,7 @@ CREATE TABLE IF NOT EXISTS tarif_layanan (
     CONSTRAINT ck_tarif_aktif CHECK (status_aktif IN (0, 1))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ============================================================================
--- 6. TRANSAKSI LAUNDRY
--- ============================================================================
+-- Fitur: Kelola Transaksi Laundry
 CREATE TABLE IF NOT EXISTS transaksi_laundry (
     id_transaksi BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     nomor_transaksi VARCHAR(40) NOT NULL,
@@ -166,9 +146,7 @@ CREATE TABLE IF NOT EXISTS transaksi_laundry (
     INDEX idx_transaksi_estimasi (estimasi_selesai)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ============================================================================
--- 7. PEMBAYARAN TRANSAKSI
--- ============================================================================
+-- Fitur: Kelola Pembayaran Transaksi
 CREATE TABLE IF NOT EXISTS pembayaran_transaksi (
     id_pembayaran BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     id_transaksi BIGINT UNSIGNED NOT NULL,
@@ -220,9 +198,7 @@ CREATE TABLE IF NOT EXISTS pembayaran_transaksi (
     INDEX idx_pembayaran_verifikasi (id_petugas_verifikasi, waktu_verifikasi)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ============================================================================
--- 8. RIWAYAT STATUS TRANSAKSI
--- ============================================================================
+-- Fitur: Lihat Riwayat Status Transaksi
 CREATE TABLE IF NOT EXISTS riwayat_status_transaksi (
     id_riwayat BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     id_transaksi BIGINT UNSIGNED NOT NULL,
@@ -241,9 +217,7 @@ CREATE TABLE IF NOT EXISTS riwayat_status_transaksi (
     INDEX idx_riwayat_transaksi_waktu (id_transaksi, waktu_perubahan)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ============================================================================
--- 9. PENGAMBILAN CUCIAN
--- ============================================================================
+-- Fitur: Catat Pengambilan Cucian
 CREATE TABLE IF NOT EXISTS pengambilan_cucian (
     id_pengambilan BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     id_transaksi BIGINT UNSIGNED NOT NULL,
@@ -261,9 +235,7 @@ CREATE TABLE IF NOT EXISTS pengambilan_cucian (
         ON UPDATE RESTRICT ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ============================================================================
--- 10. RIWAYAT PENGINGAT PENGAMBILAN
--- ============================================================================
+-- Fitur: Lihat Riwayat Pengingat Pengambilan
 CREATE TABLE IF NOT EXISTS riwayat_pengingat_pengambilan (
     id_pengingat BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     id_transaksi BIGINT UNSIGNED NOT NULL,
@@ -283,9 +255,7 @@ CREATE TABLE IF NOT EXISTS riwayat_pengingat_pengambilan (
     INDEX idx_pengingat_transaksi_waktu (id_transaksi, waktu_pengingat)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ============================================================================
--- 11. PERMOHONAN PEMBATALAN
--- ============================================================================
+-- Fitur: Kelola Permohonan Pembatalan
 CREATE TABLE IF NOT EXISTS permohonan_pembatalan (
     id_permohonan_pembatalan BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     nomor_permohonan VARCHAR(45) NOT NULL,
@@ -317,9 +287,7 @@ CREATE TABLE IF NOT EXISTS permohonan_pembatalan (
     INDEX idx_permohonan_status (status_permohonan, diajukan_pada)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ============================================================================
--- 12. PENGADUAN
--- ============================================================================
+-- Fitur: Kelola Pengaduan
 CREATE TABLE IF NOT EXISTS pengaduan (
     id_pengaduan BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     nomor_pengaduan VARCHAR(45) NOT NULL,
@@ -375,9 +343,7 @@ CREATE TABLE IF NOT EXISTS pengaduan (
     INDEX idx_pengaduan_jenis (jenis_pengaduan)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ============================================================================
--- 13. RIWAYAT STATUS PENGADUAN
--- ============================================================================
+-- Fitur: Lihat Riwayat Status Pengaduan
 CREATE TABLE IF NOT EXISTS riwayat_status_pengaduan (
     id_riwayat BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     id_pengaduan BIGINT UNSIGNED NOT NULL,
@@ -396,9 +362,7 @@ CREATE TABLE IF NOT EXISTS riwayat_status_pengaduan (
     INDEX idx_riwayat_pengaduan_waktu (id_pengaduan, waktu_perubahan)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ============================================================================
--- 14. PENYELESAIAN PENGADUAN
--- ============================================================================
+-- Fitur: Kelola Penyelesaian Pengaduan
 CREATE TABLE IF NOT EXISTS penyelesaian_pengaduan (
     id_penyelesaian BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     id_pengaduan BIGINT UNSIGNED NOT NULL,
@@ -449,9 +413,7 @@ CREATE TABLE IF NOT EXISTS penyelesaian_pengaduan (
     INDEX idx_penyelesaian_pengaduan (id_pengaduan, dibuat_pada)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ============================================================================
--- 15. PENGEMBALIAN DANA
--- ============================================================================
+-- Fitur: Kelola Pengembalian Dana
 CREATE TABLE IF NOT EXISTS pengembalian_dana (
     id_pengembalian BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     nomor_pengembalian VARCHAR(45) NOT NULL,
@@ -504,9 +466,7 @@ CREATE TABLE IF NOT EXISTS pengembalian_dana (
     INDEX idx_pengembalian_status (status_pengembalian, dibuat_pada)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ============================================================================
--- 16. CATATAN KEUANGAN PENYELESAIAN
--- ============================================================================
+-- Fitur: Catat Keuangan Penyelesaian
 CREATE TABLE IF NOT EXISTS catatan_keuangan_penyelesaian (
     id_catatan_keuangan BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     id_penyelesaian BIGINT UNSIGNED NOT NULL,
@@ -547,9 +507,7 @@ CREATE TABLE IF NOT EXISTS catatan_keuangan_penyelesaian (
     INDEX idx_catatan_keuangan_tanggal (tanggal_dibayar)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ============================================================================
--- 17. TRIGGER VALIDASI DAN PERUBAHAN STATUS
--- ============================================================================
+-- Fitur: Validasi dan Perubahan Status
 DELIMITER $$
 
 CREATE TRIGGER trg_pelanggan_sebelum_tambah

@@ -4,11 +4,8 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-/**
- * KartuStatistik
- * Kartu ringkasan metrik modern dengan sudut membulat, indikator warna di kiri,
- * judul natural, dan angka metrik yang tegas.
- */
+// Fitur: Ringkasan Statistik
+// OOP: Inheritance - KartuStatistik mewarisi PanelKartu.
 public class KartuStatistik extends PanelKartu {
 
     private final JLabel lblNilai;
@@ -19,7 +16,6 @@ public class KartuStatistik extends PanelKartu {
         super(new BorderLayout(0, 6), 16, 18);
         this.aksen = warnaAksen != null ? warnaAksen : TemaWarna.AMALFI_TILE;
 
-        // Baris atas: Indikator titik + Judul
         JPanel pnlAtas = new JPanel(new FlowLayout(FlowLayout.LEFT, 8, 0));
         pnlAtas.setOpaque(false);
 
@@ -45,7 +41,7 @@ public class KartuStatistik extends PanelKartu {
         pnlAtas.add(lblJudul);
         add(pnlAtas, BorderLayout.NORTH);
 
-        // Angka Metrik
+        // Fitur: Lihat Nilai Statistik
         lblNilai = new JLabel(nilaiAwal);
         lblNilai.setFont(new Font("Segoe UI", Font.BOLD, 24));
         lblNilai.setForeground(TemaWarna.TEKS_GELAP);

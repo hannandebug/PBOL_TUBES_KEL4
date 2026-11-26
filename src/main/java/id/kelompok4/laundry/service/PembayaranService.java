@@ -9,22 +9,13 @@ import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.Locale;
 
-/**
- * Service Pembayaran
- * Menangani aturan verifikasi pembayaran dan approval oleh Petugas/Kasir:
- * - Pembayaran harus lunas 100% (tidak boleh ada pembayaran sebagian)
- * - Nominal bayar harus sama persis dengan total biaya
- * - Menerbitkan nomor struk resmi setelah di-approve
- * - Trigger database otomatis memajukan transaksi menjadi DITERIMA
- */
+// Fitur: Pembayaran dan Verifikasi
 public class PembayaranService {
 
     private final PembayaranDAO pembayaranDAO = new PembayaranDAO();
     private final TransaksiDAO transaksiDAO = new TransaksiDAO();
 
-    /**
-     * Memproses approval pembayaran setelah kasir memverifikasi fisik uang / mutasi rekening / QRIS.
-     */
+    // Fitur: Memproses approval pembayaran setelah kasir memverifikasi fisik uang / mutasi rekening / QRIS
     public PembayaranTransaksi prosesApprovePembayaran(Long idTransaksi, Long idPetugas, String metode,
                                                        BigDecimal jumlahBayar, String catatan) throws Exception {
         if (idTransaksi == null) {
@@ -44,7 +35,7 @@ public class PembayaranService {
             throw new IllegalArgumentException("Pembayaran hanya dapat diproses untuk transaksi berstatus MENUNGGU_PEMBAYARAN.");
         }
 
-        // Cek apakah sudah pernah dibayar sebelumnya
+        // Fitur: Cegah Pembayaran Ganda
         if (pembayaranDAO.cariBerdasarkanTransaksiId(idTransaksi) != null) {
             throw new IllegalArgumentException("Transaksi ini sudah memiliki pembayaran yang tercatat.");
         }
@@ -52,7 +43,7 @@ public class PembayaranService {
             throw new IllegalArgumentException("Ada percobaan pembayaran yang masih menunggu keputusan. Tolak atau selesaikan percobaan tersebut terlebih dahulu.");
         }
 
-        // Validasi nominal bayar harus pas 100%
+        // Fitur: Validasi Nominal Pembayaran
         if (jumlahBayar == null || jumlahBayar.compareTo(trx.getTotalBiaya()) != 0) {
             throw new IllegalArgumentException(String.format(
                 "Nominal pembayaran tidak sesuai! Harus lunas tepat sebesar Rp %s (tidak boleh kurang atau lebih).",
@@ -76,6 +67,7 @@ public class PembayaranService {
         return bayar;
     }
 
+    // Fitur: Tolak Pembayaran
     public boolean tolakPembayaran(Long idTransaksi, Long idPetugas, String metode, String alasan) throws Exception {
         if (idTransaksi == null) {
             throw new IllegalArgumentException("ID transaksi tidak valid.");
@@ -108,14 +100,17 @@ public class PembayaranService {
         return pembayaranDAO.tolakPembayaran(pembayaran);
     }
 
+    // Fitur: Ambil Pembayaran By Transaksi
     public PembayaranTransaksi ambilPembayaranByTransaksi(Long idTransaksi) throws SQLException {
         return pembayaranDAO.cariBerdasarkanTransaksiId(idTransaksi);
     }
 
+    // Fitur: Ambil Pembayaran By Struk
     public PembayaranTransaksi ambilPembayaranByStruk(String nomorStruk) throws SQLException {
         return pembayaranDAO.cariBerdasarkanNomorStruk(nomorStruk);
     }
 
+    // Fitur: Validasi Metode
     private String validasiMetode(String metode) {
         if (metode == null) {
             throw new IllegalArgumentException("Metode pembayaran harus dipilih (TUNAI, TRANSFER, atau QRIS).");

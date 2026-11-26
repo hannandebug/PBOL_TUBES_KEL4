@@ -7,9 +7,7 @@ import id.kelompok4.laundry.view.login.FormLogin;
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * Main Class - Titik Masuk Aplikasi Desktop Laundry Kelompok 4
- */
+// Fitur: Inisialisasi Aplikasi
 public class Main {
 
     public static void main(String[] args) {
@@ -36,16 +34,13 @@ public class Main {
         });
     }
 
-    /**
-     * Mengatur tema FlatLaf dan styling global komponen Swing agar tampak modern dan rapi.
-     */
+    // Fitur: Mengatur tema FlatLaf dan styling global komponen Swing agar tampak modern dan rapi
     private static void inisialisasiLookAndFeel() {
         try {
             Class<?> flatLafClass = Class.forName("com.formdev.flatlaf.FlatLightLaf");
             Object flatLafInstance = flatLafClass.getDeclaredConstructor().newInstance();
             UIManager.setLookAndFeel((LookAndFeel) flatLafInstance);
 
-            // Sudut membulat dan spasi komponen modern
             UIManager.put("Component.arc", 10);
             UIManager.put("Button.arc", 10);
             UIManager.put("TextComponent.arc", 10);

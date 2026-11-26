@@ -10,17 +10,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * DAO TransaksiLaundry
- * Menangani transaksi laundry harian.
- * PENTING: Kolom berat_tagihan dan total_biaya dihitung otomatis oleh MySQL (generated column).
- */
+// Fitur: Kelola Transaksi Laundry
 public class TransaksiDAO {
 
-    /**
-     * Menyimpan transaksi baru yang dicatat oleh Petugas.
-     * Tidak menyertakan kolom generated column (berat_tagihan & total_biaya) pada INSERT.
-     */
+    // Fitur: Menyimpan transaksi baru yang dicatat oleh Petugas
     public boolean tambahTransaksi(TransaksiLaundry trx) throws SQLException {
         String sql = "INSERT INTO transaksi_laundry " +
                      "(nomor_transaksi, id_pelanggan, id_petugas_pencatat, id_jenis_layanan, id_paket, " +
@@ -48,7 +41,7 @@ public class TransaksiDAO {
                         trx.setIdTransaksi(rs.getLong(1));
                     }
                 }
-                // Refresh data untuk mendapatkan generated columns (berat_tagihan, total_biaya, tanggal_transaksi)
+
                 TransaksiLaundry dataSegar = cariBerdasarkanId(trx.getIdTransaksi());
                 if (dataSegar != null) {
                     trx.setBeratTagihan(dataSegar.getBeratTagihan());
@@ -62,9 +55,7 @@ public class TransaksiDAO {
         return false;
     }
 
-    /**
-     * Mengambil transaksi berdasarkan ID primer.
-     */
+    // Fitur: Mengambil transaksi berdasarkan ID primer
     public TransaksiLaundry cariBerdasarkanId(Long idTransaksi) throws SQLException {
         String sql = getQueryLengkap() + " WHERE t.id_transaksi = ?";
         try (Connection conn = KoneksiDatabase.getKoneksi();
@@ -79,9 +70,7 @@ public class TransaksiDAO {
         return null;
     }
 
-    /**
-     * Mengambil transaksi berdasarkan Nomor Transaksi (TRX-...).
-     */
+    // Fitur: Mengambil transaksi berdasarkan Nomor Transaksi (TRX-...)
     public TransaksiLaundry cariBerdasarkanNomor(String nomorTransaksi) throws SQLException {
         String sql = getQueryLengkap() + " WHERE t.nomor_transaksi = ?";
         try (Connection conn = KoneksiDatabase.getKoneksi();
@@ -96,9 +85,7 @@ public class TransaksiDAO {
         return null;
     }
 
-    /**
-     * Mengambil transaksi milik pelanggan tertentu (digunakan oleh role Pelanggan).
-     */
+    // Fitur: Mengambil transaksi milik pelanggan tertentu (digunakan oleh role Pelanggan)
     public List<TransaksiLaundry> ambilTransaksiPelanggan(Long idPelanggan) throws SQLException {
         List<TransaksiLaundry> list = new ArrayList<>();
         String sql = getQueryLengkap() + " WHERE t.id_pelanggan = ? ORDER BY t.tanggal_transaksi DESC";
@@ -115,9 +102,7 @@ public class TransaksiDAO {
         return list;
     }
 
-    /**
-     * Mengambil semua transaksi dengan filter status dan pencarian keyword (untuk Admin / Kasir).
-     */
+    // Fitur: Mengambil semua transaksi dengan filter status dan pencarian keyword (untuk Admin / Kasir)
     public List<TransaksiLaundry> ambilSemuaTransaksi(String filterStatus, String keyword) throws SQLException {
         List<TransaksiLaundry> list = new ArrayList<>();
         StringBuilder sb = new StringBuilder(getQueryLengkap());
@@ -155,37 +140,27 @@ public class TransaksiDAO {
         return list;
     }
 
-    /**
-     * Mengambil antrean transaksi yang masih menunggu pembayaran kasir.
-     */
+    // Fitur: Mengambil antrean transaksi yang masih menunggu pembayaran kasir
     public List<TransaksiLaundry> ambilTransaksiMenungguBayar() throws SQLException {
         return ambilSemuaTransaksi("MENUNGGU_PEMBAYARAN", null);
     }
 
-    /**
-     * Mengambil transaksi yang siap diproses pengerjaannya (status DITERIMA).
-     */
+    // Fitur: Mengambil transaksi yang siap diproses pengerjaannya (status DITERIMA)
     public List<TransaksiLaundry> ambilTransaksiDiterima() throws SQLException {
         return ambilSemuaTransaksi("DITERIMA", null);
     }
 
-    /**
-     * Mengambil transaksi yang sedang diproses (status DIPROSES).
-     */
+    // Fitur: Mengambil transaksi yang sedang diproses (status DIPROSES)
     public List<TransaksiLaundry> ambilTransaksiDiproses() throws SQLException {
         return ambilSemuaTransaksi("DIPROSES", null);
     }
 
-    /**
-     * Mengambil cucian yang siap diambil oleh pelanggan (status SIAP_DIAMBIL).
-     */
+    // Fitur: Mengambil cucian yang siap diambil oleh pelanggan (status SIAP_DIAMBIL)
     public List<TransaksiLaundry> ambilTransaksiSiapDiambil() throws SQLException {
         return ambilSemuaTransaksi("SIAP_DIAMBIL", null);
     }
 
-    /**
-     * Mengambil cucian yang belum diambil dari view database v_cucian_belum_diambil.
-     */
+    // Fitur: Mengambil cucian yang belum diambil dari view database v_cucian_belum_diambil
     public List<TransaksiLaundry> ambilCucianBelumDiambil() throws SQLException {
         List<TransaksiLaundry> list = new ArrayList<>();
         String sql = "SELECT t.*, u.nama_lengkap AS nama_pelanggan, u.nomor_telepon AS nomor_telepon, " +
@@ -211,9 +186,7 @@ public class TransaksiDAO {
         return list;
     }
 
-    /**
-     * Mengubah status pengerjaan cucian (DITERIMA -> DIPROSES -> SIAP_DIAMBIL).
-     */
+    // Fitur: Mengubah status pengerjaan cucian (DITERIMA -> DIPROSES -> SIAP_DIAMBIL)
     public boolean updateStatusPengerjaan(Long idTransaksi, String statusSebelumnya,
                                            String statusBaru, Long idPetugasPengubah) throws SQLException {
         String sql = "UPDATE transaksi_laundry SET status_transaksi = ?, id_pengguna_terakhir_memperbarui = ?, " +
@@ -230,9 +203,7 @@ public class TransaksiDAO {
         }
     }
 
-    /**
-     * Menghasilkan Nomor Transaksi unik baru: TRX-YYYYMMDD-XXXX
-     */
+    // Fitur: Menghasilkan Nomor Transaksi unik baru: TRX-YYYYMMDD-XXXX
     public String generateNomorTransaksiBaru() throws SQLException {
         String tgl = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         String prefix = "TRX-" + tgl + "-";

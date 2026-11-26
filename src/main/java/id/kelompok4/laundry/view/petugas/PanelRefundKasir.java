@@ -12,10 +12,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
 
-/**
- * PanelRefundKasir
- * Pencairan uang pengembalian (refund) kepada pelanggan oleh kasir.
- */
+// Fitur: Pencairan Refund
+// OOP: Inheritance - PanelRefundKasir mewarisi JPanel.
 public class PanelRefundKasir extends JPanel {
 
     private final PembatalanRefundService service = new PembatalanRefundService();
@@ -87,6 +85,7 @@ public class PanelRefundKasir extends JPanel {
         }
     }
 
+    // Fitur: Proses Penyerahan Refund
     private void prosesPenyerahanRefund() {
         int baris = tabelRefund.getSelectedRow();
         if (baris < 0) {

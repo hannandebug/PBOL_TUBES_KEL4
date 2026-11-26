@@ -18,21 +18,21 @@
     </properties>
 
     <dependencies>
-        <!-- MySQL Connector/J untuk konektivitas JDBC -->
+        <!-- Fitur: Konektivitas Database JDBC -->
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
             <version>8.3.0</version>
         </dependency>
 
-        <!-- jBCrypt untuk pengacakan kata sandi aman -->
+        <!-- Fitur: Pengamanan Kata Sandi -->
         <dependency>
             <groupId>org.mindrot</groupId>
             <artifactId>jbcrypt</artifactId>
             <version>0.4</version>
         </dependency>
 
-        <!-- FlatLaf untuk tampilan Java Swing modern dan bersih -->
+        <!-- Fitur: Antarmuka Java Swing -->
         <dependency>
             <groupId>com.formdev</groupId>
             <artifactId>flatlaf</artifactId>
@@ -42,7 +42,7 @@
 
     <build>
         <plugins>
-            <!-- Plugin Compiler Java -->
+            <!-- Fitur: Kompilasi Aplikasi -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -54,7 +54,7 @@
                 </configuration>
             </plugin>
 
-            <!-- Plugin Eksekusi Aplikasi Main -->
+            <!-- Fitur: Menjalankan Aplikasi -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>

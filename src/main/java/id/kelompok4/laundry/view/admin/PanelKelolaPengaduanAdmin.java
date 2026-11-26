@@ -19,10 +19,8 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 
-/**
- * PanelKelolaPengaduanAdmin
- * Penanganan pengaduan pelanggan oleh pemilik gerai.
- */
+// Fitur: Kelola Pengaduan
+// OOP: Inheritance - PanelKelolaPengaduanAdmin mewarisi JPanel.
 public class PanelKelolaPengaduanAdmin extends JPanel {
 
     private final PengaduanService pengaduanService = new PengaduanService();
@@ -153,6 +151,7 @@ public class PanelKelolaPengaduanAdmin extends JPanel {
         }
     }
 
+    // Fitur: Get Pengaduan Terpilih
     private Pengaduan getPengaduanTerpilih() {
         int baris = tabelPengaduan.getSelectedRow();
         if (baris < 0) {
@@ -195,6 +194,7 @@ public class PanelKelolaPengaduanAdmin extends JPanel {
         JOptionPane.showMessageDialog(this, new JScrollPane(ta), "Rincian Pengaduan", JOptionPane.PLAIN_MESSAGE);
     }
 
+    // Fitur: Dialog Tugaskan Penelusuran
     private void dialogTugaskanPenelusuran() {
         Pengaduan p = getPengaduanTerpilih();
         if (p == null) return;
@@ -389,6 +389,7 @@ public class PanelKelolaPengaduanAdmin extends JPanel {
         }
     }
 
+    // Fitur: Dialog Tandai Penyelesaian Selesai
     private void dialogTandaiPenyelesaianSelesai() {
         Pengaduan p = getPengaduanTerpilih();
         if (p == null) return;

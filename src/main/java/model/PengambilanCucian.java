@@ -2,10 +2,8 @@ package model;
 
 import java.sql.Timestamp;
 
-/**
- * Model PengambilanCucian
- * Merepresentasikan tabel pengambilan_cucian saat pakaian diserahkan kepada pelanggan.
- */
+// OOP: Class - PengambilanCucian merepresentasikan entitas domain.
+// OOP: Encapsulation - data objek disimpan pada atribut private.
 public class PengambilanCucian {
 
     private Long idPengambilan;
@@ -15,7 +13,6 @@ public class PengambilanCucian {
     private String namaPenerima;
     private String catatan;
 
-    // Helper tampilan
     private String nomorTransaksi;
     private String namaPetugas;
 

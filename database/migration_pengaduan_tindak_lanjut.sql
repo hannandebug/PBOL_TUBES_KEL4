@@ -1,5 +1,4 @@
--- Jalankan satu kali pada database lama RapiWash untuk menyelaraskan
--- constraint tanggung jawab dan status pengaduan dengan aplikasi.
+-- Fitur: Sinkronkan constraint dan status pengaduan pada database lama RapiWash
 ALTER TABLE pengaduan
     DROP CHECK ck_pengaduan_tanggung_jawab,
     ADD CONSTRAINT ck_pengaduan_tanggung_jawab CHECK (status_tanggung_jawab IN (

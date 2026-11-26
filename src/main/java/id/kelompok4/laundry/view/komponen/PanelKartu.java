@@ -4,11 +4,8 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-/**
- * PanelKartu
- * Kontainer kartu putih dengan sudut membulat (rounded) dan garis tepi halus.
- * Digunakan untuk mengelompokkan form, tabel, dan ringkasan agar tampil bersih.
- */
+// Fitur: Komponen Kartu Antarmuka
+// OOP: Inheritance - PanelKartu mewarisi JPanel.
 public class PanelKartu extends JPanel {
 
     private int sudut = 14;

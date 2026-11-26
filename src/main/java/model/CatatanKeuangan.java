@@ -3,14 +3,15 @@ package model;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-
+// OOP: Class - CatatanKeuangan merepresentasikan entitas domain.
+// OOP: Encapsulation - data objek disimpan pada atribut private.
 public class CatatanKeuangan {
 
     private Long idCatatanKeuangan;
     private Long idPenyelesaian;
-    private String jenisCatatan; // 'KOMPENSASI_TUNAI', 'PENGGANTIAN_BARANG'
+    private String jenisCatatan;
     private BigDecimal nominal;
-    private String statusCatatan; // 'MENUNGGU', 'DIBAYAR', 'DIBATALKAN'
+    private String statusCatatan;
     private String metodePembayaran;
     private Long dicatatOleh;
     private Long dilaksanakanOleh;

@@ -1,8 +1,6 @@
 package model;
 
-/**
- * Implementasi MetodePembayaran untuk TUNAI / CASH.
- */
+// OOP: Polymorphism - class ini memberi implementasi berbeda untuk MetodePembayaran.
 public class PembayaranTunai implements MetodePembayaran {
 
     @Override

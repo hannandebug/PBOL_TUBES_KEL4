@@ -2,10 +2,8 @@ package id.kelompok4.laundry.model;
 
 import java.sql.Timestamp;
 
-/**
- * Model PaketLaundry
- * Merepresentasikan tabel paket_laundry (misal: Reguler 48 jam, One Day 24 jam, dll).
- */
+// OOP: Class - PaketLaundry merepresentasikan entitas domain.
+// OOP: Encapsulation - data objek disimpan pada atribut private.
 public class PaketLaundry {
 
     private Long idPaket;

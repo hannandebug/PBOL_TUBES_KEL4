@@ -12,10 +12,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.Map;
 
-/**
- * PanelRingkasanPelanggan
- * Beranda akun pelanggan dengan sapaan personal dan ringkasan cucian.
- */
+// Fitur: Ringkasan Pelanggan
+// OOP: Inheritance - PanelRingkasanPelanggan mewarisi JPanel.
 public class PanelRingkasanPelanggan extends JPanel {
 
     private final JLabel lblSapaan = new JLabel();
@@ -42,7 +40,7 @@ public class PanelRingkasanPelanggan extends JPanel {
         container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
         container.setOpaque(false);
 
-        // Banner Sapaan
+        // Fitur: Tampilkan Sapaan Pelanggan
         PanelKartu pnlBanner = new PanelKartu(new BorderLayout(0, 6), 22);
         pnlBanner.setMaximumSize(new Dimension(Integer.MAX_VALUE, 96));
         pnlBanner.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -58,7 +56,7 @@ public class PanelRingkasanPelanggan extends JPanel {
         container.add(pnlBanner);
         container.add(Box.createVerticalStrut(20));
 
-        // 4 Kartu Metrik
+        // Fitur: Lihat Ringkasan Statistik Pelanggan
         JPanel pnlKartu = new JPanel(new GridLayout(1, 4, 16, 16));
         pnlKartu.setOpaque(false);
         pnlKartu.setMaximumSize(new Dimension(Integer.MAX_VALUE, 114));
@@ -70,7 +68,7 @@ public class PanelRingkasanPelanggan extends JPanel {
         container.add(pnlKartu);
         container.add(Box.createVerticalStrut(20));
 
-        // Informasi Singkat Pengambilan
+        // Fitur: Lihat Informasi Pengambilan
         PanelKartu pnlInfo = new PanelKartu(new BorderLayout(0, 8), 20);
         pnlInfo.setMaximumSize(new Dimension(Integer.MAX_VALUE, 130));
         pnlInfo.setAlignmentX(Component.LEFT_ALIGNMENT);

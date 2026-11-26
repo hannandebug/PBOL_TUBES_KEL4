@@ -7,12 +7,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * DAO Paket
- * Mengelola tabel paket_laundry (CRUD).
- */
+// Fitur: Kelola Paket Laundry
 public class PaketDAO {
 
+    // Fitur: Ambil Semua
     public List<PaketLaundry> ambilSemua() throws SQLException {
         List<PaketLaundry> list = new ArrayList<>();
         String sql = "SELECT * FROM paket_laundry ORDER BY durasi_jam ASC";
@@ -26,6 +24,7 @@ public class PaketDAO {
         return list;
     }
 
+    // Fitur: Ambil Semua Aktif
     public List<PaketLaundry> ambilSemuaAktif() throws SQLException {
         List<PaketLaundry> list = new ArrayList<>();
         String sql = "SELECT * FROM paket_laundry WHERE status_aktif = 1 ORDER BY durasi_jam ASC";
@@ -39,6 +38,7 @@ public class PaketDAO {
         return list;
     }
 
+    // Fitur: Tambah
     public boolean tambah(PaketLaundry paket) throws SQLException {
         String sql = "INSERT INTO paket_laundry (kode_paket, nama_paket, durasi_jam, keterangan, status_aktif) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = KoneksiDatabase.getKoneksi();
@@ -59,6 +59,7 @@ public class PaketDAO {
         return false;
     }
 
+    // Fitur: Ubah
     public boolean ubah(PaketLaundry paket) throws SQLException {
         String sql = "UPDATE paket_laundry SET nama_paket = ?, durasi_jam = ?, keterangan = ?, status_aktif = ? WHERE id_paket = ?";
         try (Connection conn = KoneksiDatabase.getKoneksi();

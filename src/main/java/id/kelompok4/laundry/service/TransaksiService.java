@@ -10,14 +10,7 @@ import java.math.RoundingMode;
 import java.sql.SQLException;
 import java.util.List;
 
-/**
- * Service Transaksi
- * Mengelola aturan bisnis pencatatan pesanan laundry baru oleh Petugas/Kasir:
- * - Validasi berat aktual > 0
- * - Validasi minimum tagihan 2.00 Kg
- * - Mengambil snapshot tarif dan durasi aktif saat transaksi dibuat
- * - Menerbitkan nomor transaksi resmi
- */
+// Fitur: Pembuatan Transaksi Laundry
 public class TransaksiService {
 
     private final TransaksiDAO transaksiDAO = new TransaksiDAO();
@@ -26,18 +19,14 @@ public class TransaksiService {
     public static final BigDecimal MINIMUM_BERAT_KG = new BigDecimal("2.00");
     private static final BigDecimal BERAT_MAKSIMUM_KG = new BigDecimal("999999.99");
 
-    /**
-     * Menghitung total perkiraan biaya di layar GUI kasir sebelum disimpan.
-     */
+    // Fitur: Menghitung total perkiraan biaya di layar GUI kasir sebelum disimpan
     public BigDecimal hitungBiaya(BigDecimal beratAktual, BigDecimal tarifPerKg) {
         if (beratAktual == null || tarifPerKg == null) return BigDecimal.ZERO;
         BigDecimal beratTagihan = beratAktual.compareTo(MINIMUM_BERAT_KG) < 0 ? MINIMUM_BERAT_KG : beratAktual;
         return beratTagihan.multiply(tarifPerKg).setScale(2, RoundingMode.HALF_UP);
     }
 
-    /**
-     * Membuat transaksi baru di kasir.
-     */
+    // Fitur: Membuat transaksi baru di kasir
     public TransaksiLaundry buatTransaksiBaru(Long idPelanggan, Long idPetugas, Long idJenisLayanan,
                                              Long idPaket, BigDecimal beratAktual, boolean setujuMinimum,
                                              String catatan) throws Exception {
@@ -60,12 +49,12 @@ public class TransaksiService {
             throw new IllegalArgumentException("Berat cucian melebihi batas maksimum sistem.");
         }
 
-        // Validasi berat minimum 2 KG
+        // Fitur: Validasi Berat Minimum
         if (beratAktual.compareTo(MINIMUM_BERAT_KG) < 0 && !setujuMinimum) {
             throw new IllegalArgumentException("Berat cucian di bawah 2 Kg wajib mendapatkan persetujuan biaya minimum.");
         }
 
-        // Ambil snapshot tarif resmi yang aktif saat ini
+        // Fitur: Simpan Tarif Saat Transaksi
         TarifLayanan tarif = tarifDAO.cariTarif(idJenisLayanan, idPaket);
         if (tarif == null || !tarif.isStatusAktif()) {
             throw new IllegalArgumentException("Kombinasi layanan dan paket ini belum memiliki tarif aktif.");
@@ -93,22 +82,27 @@ public class TransaksiService {
         return trx;
     }
 
+    // Fitur: Ambil Transaksi Pelanggan
     public List<TransaksiLaundry> ambilTransaksiPelanggan(Long idPelanggan) throws SQLException {
         return transaksiDAO.ambilTransaksiPelanggan(idPelanggan);
     }
 
+    // Fitur: Ambil Semua Transaksi
     public List<TransaksiLaundry> ambilSemuaTransaksi(String status, String keyword) throws SQLException {
         return transaksiDAO.ambilSemuaTransaksi(status, keyword);
     }
 
+    // Fitur: Ambil Antrean Bayar
     public List<TransaksiLaundry> ambilAntreanBayar() throws SQLException {
         return transaksiDAO.ambilTransaksiMenungguBayar();
     }
 
+    // Fitur: Ambil Cucian Belum Diambil
     public List<TransaksiLaundry> ambilCucianBelumDiambil() throws SQLException {
         return transaksiDAO.ambilCucianBelumDiambil();
     }
 
+    // Fitur: Cari Berdasarkan ID
     public TransaksiLaundry cariBerdasarkanId(Long id) throws SQLException {
         return transaksiDAO.cariBerdasarkanId(id);
     }

@@ -5,12 +5,10 @@ import id.kelompok4.laundry.model.PenyelesaianPengaduan;
 
 import java.sql.*;
 
-/**
- * DAO PenyelesaianPengaduan
- * Menangani proposal penyelesaian dari Admin dan persetujuan pelanggan.
- */
+// Fitur: Penyelesaian Pengaduan
 public class PenyelesaianDAO {
 
+    // Fitur: Tambah Penyelesaian
     public boolean tambahPenyelesaian(PenyelesaianPengaduan p) throws SQLException {
         String insertSql = "INSERT INTO penyelesaian_pengaduan " +
                            "(id_pengaduan, id_pelanggan, jenis_penyelesaian, alasan_penyelesaian, nominal_disepakati, " +
@@ -94,6 +92,7 @@ public class PenyelesaianDAO {
         }
     }
 
+    // Fitur: Cari Berdasarkan Pengaduan ID
     public PenyelesaianPengaduan cariBerdasarkanPengaduanId(Long idPengaduan) throws SQLException {
         String sql = "SELECT p.*, pg.nomor_pengaduan, u.nama_lengkap AS nama_admin " +
                      "FROM penyelesaian_pengaduan p " +
@@ -129,6 +128,7 @@ public class PenyelesaianDAO {
         return null;
     }
 
+    // Fitur: Update Respon Pelanggan
     public boolean updateResponPelanggan(Long idPenyelesaian, Long idPengaduan,
                                          String statusPersetujuan, String statusPengaduan) throws SQLException {
         String sql = "UPDATE penyelesaian_pengaduan SET status_persetujuan = ?, waktu_pelanggan_merespons = CURRENT_TIMESTAMP " +
@@ -177,6 +177,7 @@ public class PenyelesaianDAO {
         }
     }
 
+    // Fitur: Tandai Selesai
     public boolean tandaiSelesai(Long idPengaduan, Long idAdmin) throws SQLException {
         try (Connection conn = KoneksiDatabase.getKoneksi()) {
             conn.setAutoCommit(false);

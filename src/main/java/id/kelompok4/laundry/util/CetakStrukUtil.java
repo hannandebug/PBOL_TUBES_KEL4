@@ -7,11 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.print.*;
 
-/**
- * Utilitas CetakStrukUtil
- * Menghasilkan teks struk pembayaran resmi dan mendukung pencetakan ke printer fisik / PDF
- * menggunakan java.awt.print.Printable standar.
- */
+// Fitur: Cetak Struk Pembayaran
 public class CetakStrukUtil implements Printable {
 
     private final String isiStruk;
@@ -20,9 +16,7 @@ public class CetakStrukUtil implements Printable {
         this.isiStruk = isiStruk;
     }
 
-    /**
-     * Menghasilkan teks struk rapi dan berformat.
-     */
+    // Fitur: Menghasilkan teks struk rapi dan berformat
     public static String susunTeksStruk(TransaksiLaundry trx, PembayaranTransaksi bayar) {
         StringBuilder sb = new StringBuilder();
         sb.append("========================================\n");
@@ -55,9 +49,7 @@ public class CetakStrukUtil implements Printable {
         return sb.toString();
     }
 
-    /**
-     * Menjalankan dialog print standar Java.
-     */
+    // Fitur: Menjalankan dialog print standar Java
     public static void cetakKePrinter(Component parent, String teksStruk) {
         PrinterJob job = PrinterJob.getPrinterJob();
         job.setPrintable(new CetakStrukUtil(teksStruk));

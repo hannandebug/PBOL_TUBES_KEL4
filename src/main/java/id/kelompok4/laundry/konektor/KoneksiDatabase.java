@@ -8,20 +8,12 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-/**
- * Class KoneksiDatabase
- * Mengelola pembentukan koneksi JDBC ke database MySQL (laundry_kelompok4).
- * Menggunakan prinsip Singleton sederhana dan membaca konfigurasi eksternal
- * dari file database.properties agar kredensial tidak di-hardcode.
- *
- * Kelompok 4 - Pemrograman Berorientasi Objek Lanjutan (PBOL)
- */
+// Fitur: Koneksi Database MySQL
 public class KoneksiDatabase {
 
     private static final Properties properti = new Properties();
     private static boolean terinisialisasi = false;
 
-    // Nilai default jika file konfigurasi tidak ditemukan
     private static String host = "localhost";
     private static String port = "3306";
     private static String dbName = "laundry_kelompok4";
@@ -31,30 +23,25 @@ public class KoneksiDatabase {
     private static String serverTimezone = "Asia/Jakarta";
     private static String allowPublicKeyRetrieval = "true";
 
-    // Static block untuk memuat driver dan konfigurasi saat class pertama kali dipanggil
     static {
         muatKonfigurasi();
         try {
-            // Memastikan driver MySQL Connector/J terdaftar
+
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             System.err.println("[KoneksiDatabase] Driver MySQL JDBC tidak ditemukan: " + e.getMessage());
         }
     }
 
-    /**
-     * Membaca file database.properties dari classpath atau direktori kerja.
-     */
+    // Fitur: Membaca file database.properties dari classpath atau direktori kerja
     private static void muatKonfigurasi() {
         if (terinisialisasi) return;
 
         try {
             InputStream input = null;
 
-            // Prioritas 1: Baca dari resource classpath
             input = KoneksiDatabase.class.getClassLoader().getResourceAsStream("database.properties");
 
-            // Prioritas 2: Baca dari file lokal database.properties jika ada di root project
             if (input == null) {
                 File fileLokal = new File("database.properties");
                 if (fileLokal.exists()) {
@@ -62,7 +49,6 @@ public class KoneksiDatabase {
                 }
             }
 
-            // Prioritas 3: Direktori database/
             if (input == null) {
                 File fileFolder = new File("database/database.properties");
                 if (fileFolder.exists()) {
@@ -89,13 +75,7 @@ public class KoneksiDatabase {
         }
     }
 
-    /**
-     * Membuka dan mengembalikan koneksi baru ke database MySQL.
-     * Menggunakan try-with-resources pada pemanggilnya.
-     *
-     * @return Connection objek JDBC
-     * @throws SQLException jika koneksi gagal dibuka
-     */
+    // Fitur: Membuka dan mengembalikan koneksi baru ke database MySQL
     public static Connection getKoneksi() throws SQLException {
         String url = String.format(
             "jdbc:mysql://%s:%s/%s?useSSL=%s&serverTimezone=%s&allowPublicKeyRetrieval=%s&characterEncoding=utf8",
@@ -104,11 +84,7 @@ public class KoneksiDatabase {
         return DriverManager.getConnection(url, username, password);
     }
 
-    /**
-     * Menguji apakah koneksi ke database berhasil terhubung.
-     *
-     * @return true jika terhubung, false jika gagal
-     */
+    // Fitur: Menguji apakah koneksi ke database berhasil terhubung
     public static boolean ujiKoneksi() {
         try (Connection conn = getKoneksi()) {
             return conn != null && !conn.isClosed();
@@ -118,7 +94,6 @@ public class KoneksiDatabase {
         }
     }
 
-    // Getter untuk informasi konfigurasi jika dibutuhkan GUI/Status
     public static String getDbName() { return dbName; }
     public static String getHost() { return host; }
     public static String getPort() { return port; }

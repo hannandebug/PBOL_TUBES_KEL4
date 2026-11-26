@@ -17,10 +17,8 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
-/**
- * PanelLaporanAdmin
- * Monitoring transaksi, cucian belum diambil, pelanggan, serta arus kas keuangan.
- */
+// Fitur: Laporan Admin
+// OOP: Inheritance - PanelLaporanAdmin mewarisi JPanel.
 public class PanelLaporanAdmin extends JPanel {
 
     private final TransaksiDAO transaksiDAO = new TransaksiDAO();
@@ -69,7 +67,7 @@ public class PanelLaporanAdmin extends JPanel {
         JTabbedPane tab = new JTabbedPane();
         tab.setFont(TemaWarna.FONT_BOLD);
 
-        // Tab 1: Semua Transaksi
+        // Fitur: Lihat Semua Transaksi
         PanelKartu kartu1 = new PanelKartu(new BorderLayout(0, 14), 18);
         JPanel pnlFilter = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
         pnlFilter.setOpaque(false);
@@ -102,7 +100,7 @@ public class PanelLaporanAdmin extends JPanel {
         kartu1.add(TemaWarna.bungkusTabel(tabelTransaksi), BorderLayout.CENTER);
         tab.addTab("Semua Transaksi", kartu1);
 
-        // Tab 2: Belum Diambil
+        // Fitur: Pantau Cucian Belum Diambil
         PanelKartu kartu2 = new PanelKartu(new BorderLayout(0, 14), 18);
         JPanel pnlAtas2 = new JPanel(new BorderLayout());
         pnlAtas2.setOpaque(false);
@@ -116,7 +114,7 @@ public class PanelLaporanAdmin extends JPanel {
         kartu2.add(TemaWarna.bungkusTabel(tabelBelumDiambil), BorderLayout.CENTER);
         tab.addTab("Siap Diambil", kartu2);
 
-        // Tab 3: Daftar Pelanggan
+        // Fitur: Lihat Daftar Pelanggan
         PanelKartu kartu3 = new PanelKartu(new BorderLayout(0, 14), 18);
         JPanel pnlAtas3 = new JPanel(new BorderLayout());
         pnlAtas3.setOpaque(false);
@@ -129,7 +127,7 @@ public class PanelLaporanAdmin extends JPanel {
         kartu3.add(TemaWarna.bungkusTabel(tabelPelanggan), BorderLayout.CENTER);
         tab.addTab("Pelanggan", kartu3);
 
-        // Tab 4: Keuangan & Kas
+        // Fitur: Lihat Laporan Keuangan
         JPanel pnlTab4 = new JPanel(new BorderLayout(0, 16));
         pnlTab4.setBackground(TemaWarna.LATAR_BELAKANG);
         pnlTab4.setBorder(new EmptyBorder(12, 0, 0, 0));

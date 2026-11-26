@@ -1,8 +1,6 @@
 package id.kelompok4.laundry.model;
 
-/**
- * Implementasi MetodePembayaran untuk QRIS.
- */
+// OOP: Polymorphism - class ini memberi implementasi berbeda untuk MetodePembayaran.
 public class PembayaranQRIS implements MetodePembayaran {
 
     @Override

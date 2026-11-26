@@ -4,6 +4,7 @@ import javax.swing.ImageIcon;
 import java.awt.Image;
 import java.net.URL;
 
+// Fitur: Identitas RapiWash
 public final class LogoLaundry {
 
     private static final String RESOURCE_PATH = "/assets/logo.png";

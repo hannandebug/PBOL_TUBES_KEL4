@@ -9,10 +9,8 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-/**
- * FormRegistrasiPelanggan
- * Formulir pendaftaran mandiri khusus Pelanggan baru.
- */
+// Fitur: Registrasi Pelanggan
+// OOP: Inheritance - FormRegistrasiPelanggan mewarisi JDialog.
 public class FormRegistrasiPelanggan extends JDialog {
 
     private final JTextField txtNamaLengkap = new JTextField(20);
@@ -38,7 +36,6 @@ public class FormRegistrasiPelanggan extends JDialog {
         JPanel content = new JPanel(new BorderLayout());
         content.setBackground(TemaWarna.PUTIH);
 
-        // Header
         JPanel pnlHeader = new JPanel(new BorderLayout(0, 4));
         pnlHeader.setBackground(TemaWarna.AMALFI_TILE);
         pnlHeader.setBorder(new EmptyBorder(18, 24, 18, 24));
@@ -55,7 +52,6 @@ public class FormRegistrasiPelanggan extends JDialog {
         pnlHeader.add(lblSub, BorderLayout.SOUTH);
         content.add(pnlHeader, BorderLayout.NORTH);
 
-        // Form Fields
         JPanel pnlForm = new JPanel(new GridBagLayout());
         pnlForm.setBackground(TemaWarna.PUTIH);
         pnlForm.setBorder(new EmptyBorder(20, 24, 16, 24));
@@ -74,7 +70,6 @@ public class FormRegistrasiPelanggan extends JDialog {
         tambahBaris(pnlForm, gbc, baris++, "Username *", txtUsername);
         tambahBaris(pnlForm, gbc, baris++, "No. HP / WhatsApp *", txtNoTelp);
 
-        // Alamat
         gbc.gridx = 0; gbc.gridy = baris; gbc.weightx = 0.35; gbc.anchor = GridBagConstraints.NORTHWEST;
         JLabel lblAlamat = new JLabel("Alamat");
         lblAlamat.setFont(TemaWarna.FONT_BOLD);
@@ -96,7 +91,7 @@ public class FormRegistrasiPelanggan extends JDialog {
 
         content.add(pnlForm, BorderLayout.CENTER);
 
-        // Tombol Aksi
+        // Fitur: Registrasi Pelanggan
         JPanel pnlBawah = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 14));
         pnlBawah.setBackground(TemaWarna.LATAR_BELAKANG);
         pnlBawah.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, TemaWarna.ABU_BORDER));
@@ -114,6 +109,7 @@ public class FormRegistrasiPelanggan extends JDialog {
         setContentPane(content);
     }
 
+    // Fitur: Tambah Baris
     private void tambahBaris(JPanel pnl, GridBagConstraints gbc, int y, String labelText, JComponent field) {
         gbc.gridx = 0;
         gbc.gridy = y;
@@ -133,6 +129,7 @@ public class FormRegistrasiPelanggan extends JDialog {
         pnl.add(field, gbc);
     }
 
+    // Fitur: Proses Daftar
     private void prosesDaftar() {
         String nama = txtNamaLengkap.getText();
         String user = txtUsername.getText();

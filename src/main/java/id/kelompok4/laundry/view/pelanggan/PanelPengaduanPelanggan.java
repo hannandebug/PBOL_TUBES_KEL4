@@ -16,10 +16,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
 
-/**
- * PanelPengaduanPelanggan
- * Pengajuan komplain pakaian (Hilang, Rusak, Tertukar) dan tanggapan atas solusi pemilik.
- */
+// Fitur: Ajukan dan Tanggapi Pengaduan
+// OOP: Inheritance - PanelPengaduanPelanggan mewarisi JPanel.
 public class PanelPengaduanPelanggan extends JPanel {
 
     private final PengaduanService pengaduanService = new PengaduanService();
@@ -71,6 +69,7 @@ public class PanelPengaduanPelanggan extends JPanel {
         add(kartu, BorderLayout.CENTER);
     }
 
+    // Fitur: Muat Pengaduan
     public void muatPengaduan() {
         modelPengaduan.setRowCount(0);
         if (!(SessionManager.getPenggunaAktif() instanceof Pelanggan)) return;
@@ -102,6 +101,7 @@ public class PanelPengaduanPelanggan extends JPanel {
         }
     }
 
+    // Fitur: Dialog Buat Pengaduan
     private void dialogBuatPengaduan() {
         Pelanggan pel = (Pelanggan) SessionManager.getPenggunaAktif();
         try {

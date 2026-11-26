@@ -10,11 +10,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
-/**
- * HeaderBar
- * Bilah atas halaman yang bersih: judul halaman di kiri, tanggal, avatar inisial pengguna,
- * nama lengkap, dan tombol keluar di kanan.
- */
+// Fitur: Navigasi dan Sesi Pengguna
+// OOP: Inheritance - HeaderBar mewarisi JPanel.
 public class HeaderBar extends JPanel {
 
     private final JLabel lblJudulLayar;
@@ -27,13 +24,11 @@ public class HeaderBar extends JPanel {
             new EmptyBorder(14, 24, 14, 24)
         ));
 
-        // Kiri: Judul Halaman
         lblJudulLayar = new JLabel(judulAwal);
         lblJudulLayar.setFont(new Font("Segoe UI", Font.BOLD, 18));
         lblJudulLayar.setForeground(TemaWarna.TEKS_GELAP);
         add(lblJudulLayar, BorderLayout.WEST);
 
-        // Kanan: Info Tanggal, Profil Pengguna, dan Tombol Keluar
         JPanel panelKanan = new JPanel(new FlowLayout(FlowLayout.RIGHT, 14, 0));
         panelKanan.setOpaque(false);
 
@@ -45,7 +40,6 @@ public class HeaderBar extends JPanel {
         lblTanggal.setForeground(TemaWarna.ABU_TEKS);
         panelKanan.add(lblTanggal);
 
-        // Pemisah vertikal halus
         JSeparator sep = new JSeparator(SwingConstants.VERTICAL);
         sep.setPreferredSize(new Dimension(1, 22));
         sep.setForeground(TemaWarna.ABU_BORDER);
@@ -56,7 +50,6 @@ public class HeaderBar extends JPanel {
         String peran = p != null ? p.getNamaPeran() : "-";
         String inisial = ambilInisial(nama);
 
-        // Avatar lingkaran inisial
         JLabel lblAvatar = new JLabel(inisial, SwingConstants.CENTER) {
             @Override
             protected void paintComponent(Graphics g) {
@@ -73,7 +66,6 @@ public class HeaderBar extends JPanel {
         lblAvatar.setPreferredSize(new Dimension(32, 32));
         panelKanan.add(lblAvatar);
 
-        // Nama dan Peran
         JPanel pnlUserInfo = new JPanel();
         pnlUserInfo.setLayout(new BoxLayout(pnlUserInfo, BoxLayout.Y_AXIS));
         pnlUserInfo.setOpaque(false);
@@ -90,7 +82,7 @@ public class HeaderBar extends JPanel {
         pnlUserInfo.add(lblPeran);
         panelKanan.add(pnlUserInfo);
 
-        // Tombol Keluar
+        // Fitur: Logout Pengguna
         TombolKustom btnLogout = TombolKustom.buatSekunder("Keluar");
         btnLogout.setFont(TemaWarna.FONT_KECIL_BOLD);
         btnLogout.setBorder(new EmptyBorder(7, 14, 7, 14));

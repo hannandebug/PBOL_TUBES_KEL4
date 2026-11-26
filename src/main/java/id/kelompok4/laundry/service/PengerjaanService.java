@@ -7,19 +7,13 @@ import id.kelompok4.laundry.model.TransaksiLaundry;
 
 import java.sql.SQLException;
 
-/**
- * Service Pengerjaan
- * Mengatur alur fisik pengerjaan dan pengambilan cucian:
- * DITERIMA -> DIPROSES -> SIAP_DIAMBIL -> SELESAI
- */
+// Fitur: Pengerjaan dan Pengambilan Cucian
 public class PengerjaanService {
 
     private final TransaksiDAO transaksiDAO = new TransaksiDAO();
     private final PengambilanDAO pengambilanDAO = new PengambilanDAO();
 
-    /**
-     * Petugas memulai mencuci pakaian (status DITERIMA -> DIPROSES).
-     */
+    // Fitur: Petugas memulai mencuci pakaian (status DITERIMA -> DIPROSES)
     public boolean mulaiPengerjaan(Long idTransaksi, Long idPetugas) throws Exception {
         validasiIdentitas(idTransaksi, idPetugas);
         TransaksiLaundry trx = transaksiDAO.cariBerdasarkanId(idTransaksi);
@@ -32,9 +26,7 @@ public class PengerjaanService {
         return transaksiDAO.updateStatusPengerjaan(idTransaksi, "DITERIMA", "DIPROSES", idPetugas);
     }
 
-    /**
-     * Petugas menyelesaikan pengerjaan (status DIPROSES -> SIAP_DIAMBIL).
-     */
+    // Fitur: Petugas menyelesaikan pengerjaan (status DIPROSES -> SIAP_DIAMBIL)
     public boolean selesaiPengerjaan(Long idTransaksi, Long idPetugas) throws Exception {
         validasiIdentitas(idTransaksi, idPetugas);
         TransaksiLaundry trx = transaksiDAO.cariBerdasarkanId(idTransaksi);
@@ -47,10 +39,7 @@ public class PengerjaanService {
         return transaksiDAO.updateStatusPengerjaan(idTransaksi, "DIPROSES", "SIAP_DIAMBIL", idPetugas);
     }
 
-    /**
-     * Pelanggan mengambil pakaian fisik di gerai (status SIAP_DIAMBIL -> SELESAI).
-     * Trigger database trg_pengambilan_setelah_tambah otomatis memperbarui status menjadi SELESAI.
-     */
+    // Fitur: Pelanggan mengambil pakaian fisik di gerai (status SIAP_DIAMBIL -> SELESAI)
     public boolean catatPengambilan(Long idTransaksi, Long idPetugas, String namaPenerima, String catatan) throws Exception {
         validasiIdentitas(idTransaksi, idPetugas);
         TransaksiLaundry trx = transaksiDAO.cariBerdasarkanId(idTransaksi);
@@ -73,6 +62,7 @@ public class PengerjaanService {
         return pengambilanDAO.simpanPengambilan(pengambilan);
     }
 
+    // Fitur: Validasi Identitas
     private void validasiIdentitas(Long idTransaksi, Long idPetugas) {
         if (idTransaksi == null) throw new IllegalArgumentException("ID transaksi tidak valid.");
         if (idPetugas == null) throw new IllegalArgumentException("Identitas petugas tidak valid.");

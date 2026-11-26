@@ -8,11 +8,8 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * SidebarNav
- * Panel navigasi kiri terpadu dengan penanda menu aktif yang jelas,
- * logo sederhana berdesain bersih, dan efek hover halus.
- */
+// Fitur: Navigasi Menu
+// OOP: Inheritance - SidebarNav mewarisi JPanel.
 public class SidebarNav extends JPanel {
 
     private final List<TombolMenu> daftarMenu = new ArrayList<>();
@@ -24,7 +21,6 @@ public class SidebarNav extends JPanel {
         setPreferredSize(new Dimension(236, 700));
         setBorder(new EmptyBorder(24, 14, 20, 14));
 
-        // Area Brand
         JPanel pnlBrand = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
         pnlBrand.setOpaque(false);
         pnlBrand.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -54,7 +50,6 @@ public class SidebarNav extends JPanel {
         add(pnlBrand);
         add(Box.createVerticalStrut(24));
 
-        // Garis pemisah tipis
         JSeparator sep = new JSeparator();
         sep.setForeground(new Color(255, 255, 255, 40));
         sep.setBackground(new Color(255, 255, 255, 40));
@@ -63,6 +58,7 @@ public class SidebarNav extends JPanel {
         add(Box.createVerticalStrut(16));
     }
 
+    // Fitur: Tambah Menu
     public void tambahMenu(String label, Runnable aksiKlik) {
         TombolMenu btn = new TombolMenu(label);
         btn.addActionListener(e -> {
@@ -81,6 +77,7 @@ public class SidebarNav extends JPanel {
         }
     }
 
+    // Fitur: Tambah Spacer Bawah
     public void tambahSpacerBawah() {
         add(Box.createVerticalGlue());
         JLabel lblFooter = new JLabel("RapiWash LMS • 2026");
@@ -144,7 +141,7 @@ public class SidebarNav extends JPanel {
             if (aktif) {
                 g2.setColor(new Color(255, 255, 255, 38));
                 g2.fillRoundRect(0, 0, getWidth(), getHeight(), 10, 10);
-                // Garis aksen kiri
+
                 g2.setColor(TemaWarna.CITRUS_ZEST);
                 g2.fillRoundRect(0, 8, 4, getHeight() - 16, 4, 4);
             } else if (hover) {

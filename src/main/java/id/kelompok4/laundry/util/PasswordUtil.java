@@ -7,18 +7,12 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HexFormat;
 
-/**
- * Utilitas PasswordUtil
- * Melakukan hashing dan verifikasi kata sandi menggunakan algoritma BCrypt.
- * Mencegah penyimpanan kata sandi dalam bentuk teks biasa (plain text).
- */
+// Fitur: Hash dan Verifikasi Kata Sandi
 public class PasswordUtil {
 
     private static final String HASH_VERSION = "{bcrypt-sha256}";
 
-    /**
-     * Meng-hash SHA-256 terlebih dahulu agar kata sandi panjang tidak terpotong oleh batas BCrypt 72 byte.
-     */
+    // Fitur: Meng-hash SHA-256 terlebih dahulu agar kata sandi panjang tidak terpotong oleh batas BCrypt 72 byte
     public static String hashPassword(String passwordPlain) {
         if (passwordPlain == null || passwordPlain.isEmpty()) {
             throw new IllegalArgumentException("Kata sandi tidak boleh kosong.");
@@ -26,9 +20,7 @@ public class PasswordUtil {
         return HASH_VERSION + BCrypt.hashpw(sha256Hex(passwordPlain), BCrypt.gensalt(12));
     }
 
-    /**
-     * Memeriksa kecocokan kata sandi yang dimasukkan pengguna dengan hash di database.
-     */
+    // Fitur: Memeriksa kecocokan kata sandi yang dimasukkan pengguna dengan hash di database
     public static boolean checkPassword(String passwordPlain, String passwordHash) {
         if (passwordPlain == null || passwordHash == null || passwordHash.isEmpty()) {
             return false;

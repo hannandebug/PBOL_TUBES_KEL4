@@ -2,10 +2,8 @@ package model;
 
 import java.sql.Timestamp;
 
-/**
- * Model JenisLayanan
- * Merepresentasikan tabel jenis_layanan (misal: Cuci Komplit, Setrika Saja).
- */
+// OOP: Class - JenisLayanan merepresentasikan entitas domain.
+// OOP: Encapsulation - data objek disimpan pada atribut private.
 public class JenisLayanan {
 
     private Long idJenisLayanan;

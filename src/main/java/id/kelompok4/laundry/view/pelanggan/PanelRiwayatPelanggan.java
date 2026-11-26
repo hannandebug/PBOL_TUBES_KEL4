@@ -17,10 +17,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
 
-/**
- * PanelRiwayatPelanggan
- * Menampilkan daftar cucian pelanggan, struk pembayaran, dan ajukan pembatalan.
- */
+// Fitur: Riwayat dan Pembatalan Pesanan
+// OOP: Inheritance - PanelRiwayatPelanggan mewarisi JPanel.
 public class PanelRiwayatPelanggan extends JPanel {
 
     private final TransaksiDAO transaksiDAO = new TransaksiDAO();
@@ -100,6 +98,7 @@ public class PanelRiwayatPelanggan extends JPanel {
         }
     }
 
+    // Fitur: Proses Lihat Struk
     private void prosesLihatStruk() {
         int baris = tabelRiwayat.getSelectedRow();
         if (baris < 0) {
@@ -136,6 +135,7 @@ public class PanelRiwayatPelanggan extends JPanel {
         }
     }
 
+    // Fitur: Proses Ajukan Batal
     private void prosesAjukanBatal() {
         int baris = tabelRiwayat.getSelectedRow();
         if (baris < 0) {

@@ -3,10 +3,8 @@ package model;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-/**
- * Model PengembalianDana
- * Merepresentasikan tabel pengembalian_dana (Refund transaksi atau refund pengaduan).
- */
+// OOP: Class - PengembalianDana merepresentasikan entitas domain.
+// OOP: Encapsulation - data objek disimpan pada atribut private.
 public class PengembalianDana {
 
     private Long idPengembalian;
@@ -15,15 +13,14 @@ public class PengembalianDana {
     private Long idPermohonanPembatalan;
     private Long idPenyelesaian;
     private BigDecimal jumlahPengembalian;
-    private String statusPengembalian; // 'MENUNGGU', 'DIBAYAR', 'DITOLAK'
-    private String metodePengembalian; // 'TUNAI', 'TRANSFER', 'QRIS', 'LAINNYA'
+    private String statusPengembalian;
+    private String metodePengembalian;
     private Long dibuatOlehAdmin;
     private Long dibayarkanOleh;
     private Timestamp waktuPengembalian;
     private String alasan;
     private String catatan;
 
-    // Helper tampilan
     private String nomorTransaksi;
     private String namaPelanggan;
 

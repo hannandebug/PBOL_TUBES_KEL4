@@ -13,10 +13,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
 
-/**
- * PanelPengerjaanLaundry
- * Pembaruan status pengerjaan cucian dari antrean masuk -> sedang dicuci -> siap diambil.
- */
+// Fitur: Proses Pengerjaan Laundry
+// OOP: Inheritance - PanelPengerjaanLaundry mewarisi JPanel.
 public class PanelPengerjaanLaundry extends JPanel {
 
     private final TransaksiDAO transaksiDAO = new TransaksiDAO();
@@ -45,7 +43,7 @@ public class PanelPengerjaanLaundry extends JPanel {
         JTabbedPane tab = new JTabbedPane();
         tab.setFont(TemaWarna.FONT_BOLD);
 
-        // Tab 1: Antrean Masuk
+        // Fitur: Lihat Antrean Pengerjaan
         PanelKartu kartu1 = new PanelKartu(new BorderLayout(0, 14), 18);
         JPanel pnlAtas1 = new JPanel(new BorderLayout());
         pnlAtas1.setOpaque(false);
@@ -66,7 +64,7 @@ public class PanelPengerjaanLaundry extends JPanel {
         kartu1.add(TemaWarna.bungkusTabel(tabelDiterima), BorderLayout.CENTER);
         tab.addTab("Antrean Masuk", kartu1);
 
-        // Tab 2: Sedang Dicuci
+        // Fitur: Pantau Pengerjaan Laundry
         PanelKartu kartu2 = new PanelKartu(new BorderLayout(0, 14), 18);
         JPanel pnlAtas2 = new JPanel(new BorderLayout());
         pnlAtas2.setOpaque(false);
@@ -125,6 +123,7 @@ public class PanelPengerjaanLaundry extends JPanel {
         }
     }
 
+    // Fitur: Proses Mulai Cuci
     private void prosesMulaiCuci() {
         int baris = tabelDiterima.getSelectedRow();
         if (baris < 0) {
@@ -156,6 +155,7 @@ public class PanelPengerjaanLaundry extends JPanel {
         }
     }
 
+    // Fitur: Proses Selesai Cuci
     private void prosesSelesaiCuci() {
         int baris = tabelDiproses.getSelectedRow();
         if (baris < 0) {

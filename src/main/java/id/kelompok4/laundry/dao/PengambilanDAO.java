@@ -5,13 +5,10 @@ import id.kelompok4.laundry.model.PengambilanCucian;
 
 import java.sql.*;
 
-/**
- * DAO PengambilanCucian
- * Menangani penyerahan cucian yang berstatus SIAP_DIAMBIL.
- * Trigger database trg_pengambilan_setelah_tambah otomatis mengubah status transaksi menjadi SELESAI.
- */
+// Fitur: Catat Pengambilan Cucian
 public class PengambilanDAO {
 
+    // Fitur: Simpan Pengambilan
     public boolean simpanPengambilan(PengambilanCucian p) throws SQLException {
         String sql = "INSERT INTO pengambilan_cucian (id_transaksi, id_petugas_penyerah, nama_penerima, catatan) " +
                      "VALUES (?, ?, ?, ?)";
@@ -36,6 +33,7 @@ public class PengambilanDAO {
         return false;
     }
 
+    // Fitur: Cari Berdasarkan Transaksi ID
     public PengambilanCucian cariBerdasarkanTransaksiId(Long idTransaksi) throws SQLException {
         String sql = "SELECT a.*, t.nomor_transaksi, u.nama_lengkap AS nama_petugas " +
                      "FROM pengambilan_cucian a " +

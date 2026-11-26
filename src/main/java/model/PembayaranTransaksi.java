@@ -3,11 +3,8 @@ package model;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-/**
- * Model PembayaranTransaksi
- * Merepresentasikan tabel pembayaran_transaksi.
- * Menyimpan catatan pembayaran penuh di awal setelah disetujui kasir.
- */
+// OOP: Class - PembayaranTransaksi merepresentasikan entitas domain.
+// OOP: Encapsulation - data objek disimpan pada atribut private.
 public class PembayaranTransaksi {
 
     private Long idPembayaran;
@@ -20,7 +17,6 @@ public class PembayaranTransaksi {
     private String catatan;
     private Timestamp dibuatPada;
 
-    // Helper tampilan
     private String nomorTransaksi;
     private String namaPetugasPenerima;
 

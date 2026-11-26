@@ -6,11 +6,7 @@ import java.text.NumberFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
-/**
- * Utilitas FormatUtil
- * Memformat angka ke format Rupiah Indonesia (Rp), format desimal berat (Kg),
- * serta format tanggal/waktu yang ramah pengguna.
- */
+// Fitur: Format Data Tampilan
 public class FormatUtil {
 
     private static final Locale LOCALE_ID = Locale.forLanguageTag("id-ID");
@@ -22,25 +18,30 @@ public class FormatUtil {
         FORMAT_RUPIAH.setMaximumFractionDigits(0);
     }
 
+    // Fitur: Format Rupiah
     public static String formatRupiah(BigDecimal nominal) {
         if (nominal == null) return "Rp0";
         return FORMAT_RUPIAH.format(nominal).replace(",00", "");
     }
 
+    // Fitur: Format Rupiah
     public static String formatRupiah(double nominal) {
         return formatRupiah(BigDecimal.valueOf(nominal));
     }
 
+    // Fitur: Format Berat
     public static String formatBerat(BigDecimal beratKg) {
         if (beratKg == null) return "0,00 Kg";
         return String.format(LOCALE_ID, "%.2f Kg", beratKg);
     }
 
+    // Fitur: Format Tanggal Waktu
     public static String formatTanggalWaktu(Timestamp ts) {
         if (ts == null) return "-";
         return ts.toLocalDateTime().format(FORMAT_TANGGAL_WAKTU);
     }
 
+    // Fitur: Format Tanggal
     public static String formatTanggal(Timestamp ts) {
         if (ts == null) return "-";
         return ts.toLocalDateTime().format(FORMAT_TANGGAL);

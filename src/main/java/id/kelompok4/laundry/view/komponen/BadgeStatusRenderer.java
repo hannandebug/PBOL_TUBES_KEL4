@@ -4,11 +4,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 
-/**
- * BadgeStatusRenderer
- * Merender status dalam bentuk kapsul (pill badge) yang rapi di dalam sel tabel
- * dan menerjemahkan kode database menjadi teks yang mudah dibaca pengguna.
- */
+// Fitur: Tampilkan Badge Status
+// OOP: Inheritance - BadgeStatusRenderer mewarisi DefaultTableCellRenderer.
 public class BadgeStatusRenderer extends DefaultTableCellRenderer {
 
     private Color bgPill = new Color(0xE2, 0xE8, 0xF0);

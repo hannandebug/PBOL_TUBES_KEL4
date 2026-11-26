@@ -9,10 +9,8 @@ import id.kelompok4.laundry.view.login.FormLogin;
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * DashboardAdminFrame
- * Jendela utama untuk Admin / Pemilik Laundry.
- */
+// Fitur: Dashboard Admin
+// OOP: Inheritance - DashboardAdminFrame mewarisi JFrame.
 public class DashboardAdminFrame extends JFrame {
 
     private final CardLayout cardLayout = new CardLayout();
@@ -70,6 +68,7 @@ public class DashboardAdminFrame extends JFrame {
         setContentPane(root);
     }
 
+    // Fitur: Tambah Navigasi
     private void tambahNavigasi(SidebarNav sidebar, String menuLabel, String judulHeader, String cardName, Runnable onSelect) {
         sidebar.tambahMenu(menuLabel, () -> {
             cardLayout.show(pnlKonten, cardName);

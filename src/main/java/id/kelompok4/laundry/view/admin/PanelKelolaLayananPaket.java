@@ -16,10 +16,8 @@ import java.awt.*;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * PanelKelolaLayananPaket
- * Pengelolaan daftar layanan, paket kecepatan, dan tarif per kg.
- */
+// Fitur: Kelola Layanan, Paket, dan Tarif
+// OOP: Inheritance - PanelKelolaLayananPaket mewarisi JPanel.
 public class PanelKelolaLayananPaket extends JPanel {
 
     private final LayananDAO layananDAO = new LayananDAO();
@@ -54,9 +52,8 @@ public class PanelKelolaLayananPaket extends JPanel {
         JTabbedPane tabbedPane = new JTabbedPane();
         tabbedPane.setFont(TemaWarna.FONT_BOLD);
 
-        // ==========================================
-        // TAB 1: JENIS LAYANAN
-        // ==========================================
+        // Fitur: Kelola Layanan
+
         PanelKartu kartuLayanan = new PanelKartu(new BorderLayout(0, 14), 18);
         JPanel headerLayanan = new JPanel(new BorderLayout(0, 8));
         headerLayanan.setOpaque(false);
@@ -89,9 +86,8 @@ public class PanelKelolaLayananPaket extends JPanel {
         kartuLayanan.add(TemaWarna.bungkusTabel(tabelLayanan), BorderLayout.CENTER);
         tabbedPane.addTab("Jenis Layanan", kartuLayanan);
 
-        // ==========================================
-        // TAB 2: PAKET KECEPATAN
-        // ==========================================
+        // Fitur: Kelola Paket Laundry
+
         PanelKartu kartuPaket = new PanelKartu(new BorderLayout(0, 14), 18);
         JPanel headerPaket = new JPanel(new BorderLayout(0, 8));
         headerPaket.setOpaque(false);
@@ -124,9 +120,8 @@ public class PanelKelolaLayananPaket extends JPanel {
         kartuPaket.add(TemaWarna.bungkusTabel(tabelPaket), BorderLayout.CENTER);
         tabbedPane.addTab("Paket Cucian", kartuPaket);
 
-        // ==========================================
-        // TAB 3: TARIF PER KG
-        // ==========================================
+        // Fitur: Kelola Tarif
+
         PanelKartu kartuTarif = new PanelKartu(new BorderLayout(0, 14), 18);
         JPanel headerTarif = new JPanel(new BorderLayout(0, 8));
         headerTarif.setOpaque(false);
@@ -186,6 +181,7 @@ public class PanelKelolaLayananPaket extends JPanel {
         }
     }
 
+    // Fitur: Dialog Tambah Layanan
     private void dialogTambahLayanan() {
         JTextField txtKode = new JTextField(18);
         JTextField txtNama = new JTextField(18);
@@ -266,6 +262,7 @@ public class PanelKelolaLayananPaket extends JPanel {
         }
     }
 
+    // Fitur: Dialog Ubah Layanan
     private void dialogUbahLayanan() {
         int baris = tabelLayanan.getSelectedRow();
         if (baris < 0) {
@@ -350,6 +347,7 @@ public class PanelKelolaLayananPaket extends JPanel {
         }
     }
 
+    // Fitur: Dialog Tambah Paket
     private void dialogTambahPaket() {
         JTextField txtKode = new JTextField(18);
         JTextField txtNama = new JTextField(18);
@@ -386,6 +384,7 @@ public class PanelKelolaLayananPaket extends JPanel {
         }
     }
 
+    // Fitur: Dialog Ubah Paket
     private void dialogUbahPaket() {
         int baris = tabelPaket.getSelectedRow();
         if (baris < 0) {
@@ -513,6 +512,7 @@ public class PanelKelolaLayananPaket extends JPanel {
         }
     }
 
+    // Fitur: Dialog Ubah Tarif
     private void dialogUbahTarif() {
         int baris = tabelTarif.getSelectedRow();
         if (baris < 0) {

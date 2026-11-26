@@ -1,25 +1,14 @@
 package model;
 
-/**
- * Interface MetodePembayaran
- * Menerapkan konsep Interface dalam Pemrograman Berorientasi Objek.
- * Menstandarkan kode, nama tampilan, dan petunjuk verifikasi metode pembayaran.
- */
+// OOP: Abstraction - interface menetapkan kontrak untuk setiap metode pembayaran.
 public interface MetodePembayaran {
 
-    /**
-     * Mengembalikan kode metode yang cocok dengan CHECK constraint database
-     * ('TUNAI', 'TRANSFER', 'QRIS', 'LAINNYA').
-     */
+    // OOP: Abstraction - kontrak kode metode pembayaran
     String getKodeMetode();
 
-    /**
-     * Mengembalikan nama tampilan user-friendly untuk GUI.
-     */
+    // OOP: Abstraction - kontrak nama tampilan metode pembayaran
     String getNamaTampilan();
 
-    /**
-     * Mengembalikan petunjuk langkah verifikasi bagi Petugas/Kasir.
-     */
+    // OOP: Abstraction - kontrak petunjuk verifikasi pembayaran
     String getPetunjukVerifikasiKasir();
 }

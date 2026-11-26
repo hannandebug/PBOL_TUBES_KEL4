@@ -7,11 +7,8 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 import java.awt.*;
 
-/**
- * TabelKustom
- * JTable bergaya modern: header lembut, tinggi baris lega (40px),
- * garis pemisah halus, dan mendukung penyembunyian kolom ID teknis.
- */
+// Fitur: Tampilkan Data pada Tabel
+// OOP: Inheritance - TabelKustom mewarisi JTable.
 public class TabelKustom extends JTable {
 
     public TabelKustom(DefaultTableModel model) {
@@ -37,7 +34,6 @@ public class TabelKustom extends JTable {
         setSelectionForeground(TemaWarna.TEKS_GELAP);
         setFillsViewportHeight(true);
 
-        // Header bersih dengan aksen abu-slate lembut
         JTableHeader header = getTableHeader();
         header.setFont(TemaWarna.FONT_KECIL_BOLD);
         header.setBackground(new Color(0xF1, 0xF5, 0xF9));
@@ -69,7 +65,6 @@ public class TabelKustom extends JTable {
         };
         header.setDefaultRenderer(headerRenderer);
 
-        // Renderer sel baris
         setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value,
@@ -85,10 +80,7 @@ public class TabelKustom extends JTable {
         });
     }
 
-    /**
-     * Menyembunyikan kolom ID internal database dari tampilan pengguna
-     * sambil tetap menyimpan nilainya di TableModel.
-     */
+    // Fitur: Menyembunyikan kolom ID internal database dari tampilan pengguna
     public void sembunyikanKolom(int... indeksKolom) {
         for (int idx : indeksKolom) {
             if (idx >= 0 && idx < getColumnModel().getColumnCount()) {

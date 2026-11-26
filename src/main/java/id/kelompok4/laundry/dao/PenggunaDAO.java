@@ -10,17 +10,11 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * DAO Pengguna
- * Menangani operasi database untuk akun (Admin, Petugas, Pelanggan).
- * Menggunakan prinsip Polymorphism: mengembalikan objek Pengguna
- * yang secara dinamis diinstansiasi sebagai Admin, Petugas, atau Pelanggan.
- */
+// Fitur: Kelola Akun Pengguna
+// OOP: Polymorphism - pemetaan role menghasilkan subclass Pengguna yang sesuai.
 public class PenggunaDAO {
 
-    /**
-     * Memetakan baris ResultSet ke objek turunan Pengguna yang tepat.
-     */
+    // OOP: Polymorphism - pemetaan role menghasilkan subclass Pengguna yang sesuai.
     private Pengguna mapRowKePengguna(ResultSet rs) throws SQLException {
         String peran = rs.getString("peran");
         Pengguna pengguna;
@@ -31,7 +25,7 @@ public class PenggunaDAO {
             pengguna = new Petugas();
         } else {
             Pelanggan p = new Pelanggan();
-            // Coba ambil field pelanggan jika di-join
+
             try {
                 p.setIdPelanggan(rs.getLong("id_pelanggan"));
                 p.setKodePelanggan(rs.getString("kode_pelanggan"));
@@ -54,10 +48,7 @@ public class PenggunaDAO {
         return pengguna;
     }
 
-    /**
-     * Mencari pengguna berdasarkan username login.
-     * Melakukan join dengan tabel pelanggan jika pengguna adalah PELANGGAN.
-     */
+    // Fitur: Mencari pengguna berdasarkan username login
     public Pengguna cariBerdasarkanUsername(String username) throws SQLException {
         String sql = "SELECT u.*, p.id_pelanggan, p.kode_pelanggan, p.alamat, p.catatan " +
                      "FROM pengguna u " +
@@ -76,10 +67,7 @@ public class PenggunaDAO {
         return null;
     }
 
-    /**
-     * Mencari pengguna berdasarkan identifier login: bisa berupa username ATAU nomor telepon terdaftar.
-     * Sesuai ketentuan Flowchart Login: 'Masukkan nama atau nomor telepon dan password'.
-     */
+    // Fitur: Mencari pengguna berdasarkan identifier login: bisa berupa username ATAU nomor telepon terdaftar
     public Pengguna cariBerdasarkanIdentifierLogin(String identifier) throws SQLException {
         String sql = "SELECT u.*, p.id_pelanggan, p.kode_pelanggan, p.alamat, p.catatan " +
                      "FROM pengguna u " +
@@ -99,9 +87,7 @@ public class PenggunaDAO {
         return null;
     }
 
-    /**
-     * Mencari pengguna berdasarkan ID pengguna.
-     */
+    // Fitur: Mencari pengguna berdasarkan ID pengguna
     public Pengguna cariBerdasarkanId(Long idPengguna) throws SQLException {
         String sql = "SELECT u.*, p.id_pelanggan, p.kode_pelanggan, p.alamat, p.catatan " +
                      "FROM pengguna u " +
@@ -120,9 +106,7 @@ public class PenggunaDAO {
         return null;
     }
 
-    /**
-     * Menambahkan akun Admin baru (biasanya saat setup awal aplikasi).
-     */
+    // Fitur: Menambahkan akun Admin baru (biasanya saat setup awal aplikasi)
     public boolean tambahAdmin(Admin admin) throws SQLException {
         String sql = "INSERT INTO pengguna (nama_lengkap, nama_pengguna, kata_sandi_hash, peran, nomor_telepon, status_aktif) " +
                      "VALUES (?, ?, ?, 'ADMIN', ?, 1)";
@@ -147,9 +131,7 @@ public class PenggunaDAO {
         return false;
     }
 
-    /**
-     * Menambahkan akun Petugas baru oleh Admin.
-     */
+    // Fitur: Menambahkan akun Petugas baru oleh Admin
     public boolean tambahPetugas(Petugas petugas) throws SQLException {
         String sql = "INSERT INTO pengguna (nama_lengkap, nama_pengguna, kata_sandi_hash, peran, nomor_telepon, status_aktif) " +
                      "VALUES (?, ?, ?, 'PETUGAS', ?, ?)";
@@ -175,9 +157,7 @@ public class PenggunaDAO {
         return false;
     }
 
-    /**
-     * Mengubah data pengguna (nama lengkap dan nomor telepon).
-     */
+    // Fitur: Mengubah data pengguna (nama lengkap dan nomor telepon)
     public boolean ubahPengguna(Pengguna pengguna) throws SQLException {
         String sql = "UPDATE pengguna SET nama_lengkap = ?, nomor_telepon = ?, status_aktif = ? WHERE id_pengguna = ?";
 
@@ -191,9 +171,7 @@ public class PenggunaDAO {
         }
     }
 
-    /**
-     * Mengubah kata sandi pengguna.
-     */
+    // Fitur: Mengubah kata sandi pengguna
     public boolean ubahKataSandi(Long idPengguna, String hashKataSandiBaru) throws SQLException {
         String sql = "UPDATE pengguna SET kata_sandi_hash = ? WHERE id_pengguna = ?";
 
@@ -205,9 +183,7 @@ public class PenggunaDAO {
         }
     }
 
-    /**
-     * Mengaktifkan atau menonaktifkan akun (soft delete).
-     */
+    // Fitur: Mengaktifkan atau menonaktifkan akun (soft delete)
     public boolean setStatusAktif(Long idPengguna, boolean aktif) throws SQLException {
         String sql = "UPDATE pengguna SET status_aktif = ? WHERE id_pengguna = ?";
 
@@ -219,9 +195,7 @@ public class PenggunaDAO {
         }
     }
 
-    /**
-     * Mengambil seluruh daftar Petugas/Kasir untuk menu Admin.
-     */
+    // Fitur: Mengambil seluruh daftar Petugas/Kasir untuk menu Admin
     public List<Petugas> ambilSemuaPetugas() throws SQLException {
         List<Petugas> daftar = new ArrayList<>();
         String sql = "SELECT * FROM pengguna WHERE peran = 'PETUGAS' ORDER BY dibuat_pada DESC";
@@ -236,9 +210,7 @@ public class PenggunaDAO {
         return daftar;
     }
 
-    /**
-     * Menghitung total akun terdaftar (untuk verifikasi setup Admin pertama).
-     */
+    // Fitur: Menghitung total akun terdaftar (untuk verifikasi setup Admin pertama)
     public int hitungTotalPengguna() throws SQLException {
         String sql = "SELECT COUNT(*) FROM pengguna";
         try (Connection conn = KoneksiDatabase.getKoneksi();
@@ -249,9 +221,7 @@ public class PenggunaDAO {
         return 0;
     }
 
-    /**
-     * Menghitung jumlah akun Admin aktif.
-     */
+    // Fitur: Menghitung jumlah akun Admin aktif
     public int hitungJumlahAdmin() throws SQLException {
         String sql = "SELECT COUNT(*) FROM pengguna WHERE peran = 'ADMIN' AND status_aktif = 1";
         try (Connection conn = KoneksiDatabase.getKoneksi();

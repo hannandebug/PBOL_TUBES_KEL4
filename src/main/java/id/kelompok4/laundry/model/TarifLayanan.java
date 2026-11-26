@@ -3,10 +3,8 @@ package id.kelompok4.laundry.model;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-/**
- * Model TarifLayanan
- * Merepresentasikan tarif per kilogram untuk kombinasi JenisLayanan dan PaketLaundry.
- */
+// OOP: Class - TarifLayanan merepresentasikan entitas domain.
+// OOP: Encapsulation - data objek disimpan pada atribut private.
 public class TarifLayanan {
 
     private Long idTarif;
@@ -17,7 +15,6 @@ public class TarifLayanan {
     private Timestamp dibuatPada;
     private Timestamp diperbaruiPada;
 
-    // Properti join pendukung tampilan GUI
     private String namaLayanan;
     private String namaPaket;
     private int durasiJam;

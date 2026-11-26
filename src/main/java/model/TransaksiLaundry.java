@@ -3,11 +3,8 @@ package model;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-/**
- * Model TransaksiLaundry
- * Merepresentasikan tabel transaksi_laundry.
- * Kolom berat_tagihan dan total_biaya adalah generated column dari MySQL.
- */
+// OOP: Class - TransaksiLaundry merepresentasikan entitas domain.
+// OOP: Encapsulation - data objek disimpan pada atribut private.
 public class TransaksiLaundry {
 
     private Long idTransaksi;
@@ -29,7 +26,6 @@ public class TransaksiLaundry {
     private String catatan;
     private Long idPenggunaTerakhirMemperbarui;
 
-    // Helper tampilan join GUI
     private String namaPelanggan;
     private String kodePelanggan;
     private String nomorTeleponPelanggan;
@@ -45,7 +41,6 @@ public class TransaksiLaundry {
         this.pelangganSetujuMinimum = false;
     }
 
-    // Getters and Setters
     public Long getIdTransaksi() { return idTransaksi; }
     public void setIdTransaksi(Long idTransaksi) { this.idTransaksi = idTransaksi; }
 

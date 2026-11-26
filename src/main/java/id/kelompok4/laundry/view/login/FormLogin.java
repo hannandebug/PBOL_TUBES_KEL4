@@ -16,10 +16,8 @@ import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-/**
- * FormLogin
- * Layar masuk utama aplikasi RapiWash Laundry Management System.
- */
+// Fitur: Login Pengguna
+// OOP: Inheritance - FormLogin mewarisi JFrame.
 public class FormLogin extends JFrame {
 
     private final JTextField txtUsername = new JTextField(20);
@@ -43,16 +41,15 @@ public class FormLogin extends JFrame {
     private void initUI() {
         JPanel root = new JPanel(new GridBagLayout());
 
-        // ==========================================
-        // PANEL KIRI: VISUAL BRAND & KEUNGGULAN
-        // ==========================================
+
+
         JPanel pnlKiri = new JPanel(new BorderLayout()) {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 Graphics2D g2 = (Graphics2D) g.create();
                 g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                // Dekorasi gelembung lembut di latar
+
                 g2.setColor(new Color(255, 255, 255, 16));
                 g2.fillOval(-60, getHeight() - 180, 260, 260);
                 g2.fillOval(getWidth() - 120, -50, 200, 200);
@@ -64,7 +61,6 @@ public class FormLogin extends JFrame {
         pnlKiri.setBackground(TemaWarna.AMALFI_TILE);
         pnlKiri.setBorder(new EmptyBorder(40, 40, 32, 40));
 
-        // Logo & Nama Brand
         JPanel pnlBrand = new JPanel(new FlowLayout(FlowLayout.LEFT, 12, 0));
         pnlBrand.setOpaque(false);
 
@@ -78,7 +74,6 @@ public class FormLogin extends JFrame {
         pnlBrand.add(ikon);
         pnlBrand.add(lblLogo);
 
-        // Konten Tengah Kiri
         JPanel pnlHero = new JPanel();
         pnlHero.setLayout(new BoxLayout(pnlHero, BoxLayout.Y_AXIS));
         pnlHero.setOpaque(false);
@@ -113,9 +108,8 @@ public class FormLogin extends JFrame {
         pnlKiri.add(pnlHero, BorderLayout.CENTER);
         pnlKiri.add(lblFooter, BorderLayout.SOUTH);
 
-        // ==========================================
-        // PANEL KANAN: FORM LOGIN BERSIH
-        // ==========================================
+
+
         JPanel pnlKanan = new JPanel(new GridBagLayout());
         pnlKanan.setBackground(TemaWarna.PUTIH);
         pnlKanan.setBorder(new EmptyBorder(36, 40, 36, 40));
@@ -141,7 +135,7 @@ public class FormLogin extends JFrame {
         pnlForm.add(lblInstruksi);
         pnlForm.add(Box.createVerticalStrut(28));
 
-        // Field Username / No. HP
+        // Fitur: Login dengan Username atau Nomor HP
         JLabel lblUser = new JLabel("Username atau No. HP");
         lblUser.setFont(TemaWarna.FONT_BOLD);
         lblUser.setForeground(TemaWarna.TEKS_GELAP);
@@ -158,7 +152,6 @@ public class FormLogin extends JFrame {
         pnlForm.add(txtUsername);
         pnlForm.add(Box.createVerticalStrut(16));
 
-        // Field Password
         JLabel lblPass = new JLabel("Kata Sandi");
         lblPass.setFont(TemaWarna.FONT_BOLD);
         lblPass.setForeground(TemaWarna.TEKS_GELAP);
@@ -180,7 +173,7 @@ public class FormLogin extends JFrame {
         pnlForm.add(pnlPassword);
         pnlForm.add(Box.createVerticalStrut(24));
 
-        // Tombol Login
+        // Fitur: Login Pengguna
         btnLogin.setMaximumSize(new Dimension(Integer.MAX_VALUE, 42));
         btnLogin.setPreferredSize(new Dimension(360, 42));
         btnLogin.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -200,7 +193,7 @@ public class FormLogin extends JFrame {
         pnlForm.add(btnLogin);
         pnlForm.add(Box.createVerticalStrut(16));
 
-        // Tombol Registrasi Pelanggan
+        // Fitur: Registrasi Pelanggan
         btnDaftar.setFont(TemaWarna.FONT_BOLD);
         btnDaftar.setForeground(TemaWarna.AMALFI_TILE);
         btnDaftar.setContentAreaFilled(false);
@@ -278,6 +271,7 @@ public class FormLogin extends JFrame {
         return p;
     }
 
+    // Fitur: Proses Login
     private void prosesLogin() {
         String username = txtUsername.getText();
         String password = new String(txtPassword.getPassword());

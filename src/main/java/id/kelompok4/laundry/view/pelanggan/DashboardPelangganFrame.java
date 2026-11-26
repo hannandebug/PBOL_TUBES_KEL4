@@ -9,10 +9,8 @@ import id.kelompok4.laundry.view.login.FormLogin;
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * DashboardPelangganFrame
- * Jendela utama akun Pelanggan.
- */
+// Fitur: Dashboard Pelanggan
+// OOP: Inheritance - DashboardPelangganFrame mewarisi JFrame.
 public class DashboardPelangganFrame extends JFrame {
 
     private final CardLayout cardLayout = new CardLayout();
@@ -64,6 +62,7 @@ public class DashboardPelangganFrame extends JFrame {
         setContentPane(root);
     }
 
+    // Fitur: Tambah Navigasi
     private void tambahNavigasi(SidebarNav sidebar, String menuLabel, String judulHeader, String cardName, Runnable onSelect) {
         sidebar.tambahMenu(menuLabel, () -> {
             cardLayout.show(pnlKonten, cardName);

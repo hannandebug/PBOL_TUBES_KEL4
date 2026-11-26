@@ -9,13 +9,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * DAO PembayaranTransaksi
- * Menangani pencatatan pembayaran transaksi.
- * Mendukung skema pembayaran langsung dan skema dengan verifikasi status.
- */
+// Fitur: Pembayaran dan Verifikasi
 public class PembayaranDAO {
 
+    // Fitur: Simpan Pembayaran
     public boolean simpanPembayaran(PembayaranTransaksi p) throws SQLException {
         try (Connection conn = KoneksiDatabase.getKoneksi()) {
             if (menggunakanAlurVerifikasi(conn)) {
@@ -26,6 +23,7 @@ public class PembayaranDAO {
         }
     }
 
+    // Fitur: Tolak Pembayaran
     public boolean tolakPembayaran(PembayaranTransaksi p) throws SQLException {
         try (Connection conn = KoneksiDatabase.getKoneksi()) {
             if (!menggunakanAlurVerifikasi(conn)) {
@@ -84,6 +82,7 @@ public class PembayaranDAO {
         }
     }
 
+    // Fitur: Simpan Pembayaran Langsung
     private boolean simpanPembayaranLangsung(Connection conn, PembayaranTransaksi p) throws SQLException {
         String sql = "INSERT INTO pembayaran_transaksi " +
                      "(id_transaksi, nomor_struk, jumlah_bayar, metode_pembayaran, diterima_oleh, catatan) " +
@@ -111,6 +110,7 @@ public class PembayaranDAO {
         return false;
     }
 
+    // Fitur: Simpan Pembayaran Dengan Verifikasi
     private boolean simpanPembayaranDenganVerifikasi(Connection conn, PembayaranTransaksi p) throws SQLException {
         conn.setAutoCommit(false);
         try {
@@ -172,6 +172,7 @@ public class PembayaranDAO {
         }
     }
 
+    // Fitur: Cari Berdasarkan Transaksi ID
     public PembayaranTransaksi cariBerdasarkanTransaksiId(Long idTransaksi) throws SQLException {
         try (Connection conn = KoneksiDatabase.getKoneksi()) {
             boolean alurVerifikasi = menggunakanAlurVerifikasi(conn);
@@ -204,6 +205,7 @@ public class PembayaranDAO {
         }
     }
 
+    // Fitur: Cari Percobaan Menunggu
     private Long cariPercobaanMenunggu(Connection conn, Long idTransaksi) throws SQLException {
         String sql = "SELECT id_pembayaran FROM pembayaran_transaksi " +
                      "WHERE id_transaksi = ? AND status_verifikasi = 'MENUNGGU_VERIFIKASI' " +
@@ -216,6 +218,7 @@ public class PembayaranDAO {
         }
     }
 
+    // Fitur: Cari Berdasarkan Nomor Struk
     public PembayaranTransaksi cariBerdasarkanNomorStruk(String nomorStruk) throws SQLException {
         try (Connection conn = KoneksiDatabase.getKoneksi();
              PreparedStatement ps = conn.prepareStatement(queryPencarianPembayaran(conn) + " WHERE p.nomor_struk = ?")) {
@@ -257,6 +260,7 @@ public class PembayaranDAO {
                jenisJoin + " pengguna u ON u.id_pengguna = " + petugas;
     }
 
+    // Fitur: Generate Nomor Struk Baru
     public String generateNomorStrukBaru() throws SQLException {
         String tgl = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         String prefix = "STRUK-" + tgl + "-";

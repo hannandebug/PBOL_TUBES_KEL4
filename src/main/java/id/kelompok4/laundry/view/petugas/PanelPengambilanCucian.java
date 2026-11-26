@@ -13,10 +13,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
 
-/**
- * PanelPengambilanCucian
- * Penyerahan pakaian yang sudah selesai kepada pelanggan di gerai.
- */
+// Fitur: Catat Pengambilan Cucian
+// OOP: Inheritance - PanelPengambilanCucian mewarisi JPanel.
 public class PanelPengambilanCucian extends JPanel {
 
     private final TransaksiDAO transaksiDAO = new TransaksiDAO();
@@ -84,6 +82,7 @@ public class PanelPengambilanCucian extends JPanel {
         }
     }
 
+    // Fitur: Proses Penyerahan
     private void prosesPenyerahan() {
         int baris = tabelSiapAmbil.getSelectedRow();
         if (baris < 0) {

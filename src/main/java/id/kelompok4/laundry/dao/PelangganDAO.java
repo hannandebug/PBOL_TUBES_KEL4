@@ -7,18 +7,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * DAO Pelanggan
- * Menangani transaksi pendaftaran mandiri pelanggan dan query data pelanggan.
- * Menerapkan Database Transaction (Commit & Rollback) untuk insert atomik
- * ke tabel pengguna dan tabel pelanggan.
- */
+// Fitur: Registrasi dan Data Pelanggan
 public class PelangganDAO {
 
-    /**
-     * Mendaftarkan pelanggan baru secara atomik.
-     * Jika insert ke salah satu tabel gagal, seluruh operasi di-rollback.
-     */
+    // Fitur: Mendaftarkan pelanggan baru secara atomik
     public boolean registrasiPelanggan(Pelanggan pelanggan, String kataSandiHash) throws SQLException {
         String sqlPengguna = "INSERT INTO pengguna (nama_lengkap, nama_pengguna, kata_sandi_hash, peran, nomor_telepon, status_aktif) " +
                              "VALUES (?, ?, ?, 'PELANGGAN', ?, 1)";
@@ -28,10 +20,9 @@ public class PelangganDAO {
         Connection conn = null;
         try {
             conn = KoneksiDatabase.getKoneksi();
-            // Matikan autocommit untuk memulai transaksi database
+
             conn.setAutoCommit(false);
 
-            // 1. Insert ke tabel pengguna
             Long idPenggunaBaru;
             try (PreparedStatement psUser = conn.prepareStatement(sqlPengguna, Statement.RETURN_GENERATED_KEYS)) {
                 psUser.setString(1, pelanggan.getNamaLengkap());
@@ -50,13 +41,11 @@ public class PelangganDAO {
                 }
             }
 
-            // 2. Buat kode pelanggan unik jika belum ada
             String kode = pelanggan.getKodePelanggan();
             if (kode == null || kode.trim().isEmpty()) {
                 kode = generateKodePelanggan(conn);
             }
 
-            // 3. Insert ke tabel pelanggan
             try (PreparedStatement psPel = conn.prepareStatement(sqlPelanggan, Statement.RETURN_GENERATED_KEYS)) {
                 psPel.setLong(1, idPenggunaBaru);
                 psPel.setString(2, kode);
@@ -74,7 +63,6 @@ public class PelangganDAO {
             pelanggan.setIdPengguna(idPenggunaBaru);
             pelanggan.setKodePelanggan(kode);
 
-            // Commit transaksi jika seluruh langkah sukses
             conn.commit();
             return true;
         } catch (SQLException e) {
@@ -89,9 +77,7 @@ public class PelangganDAO {
         }
     }
 
-    /**
-     * Menghasilkan kode pelanggan baru (misal: PLG-0001).
-     */
+    // Fitur: Menghasilkan kode pelanggan baru (misal: PLG-0001)
     private String generateKodePelanggan(Connection conn) throws SQLException {
         String sql = "SELECT MAX(id_pelanggan) FROM pelanggan";
         try (Statement st = conn.createStatement();
@@ -104,18 +90,14 @@ public class PelangganDAO {
         }
     }
 
-    /**
-     * Menghasilkan kode pelanggan baru menggunakan koneksi default.
-     */
+    // Fitur: Menghasilkan kode pelanggan baru menggunakan koneksi default
     public String generateKodePelangganBaru() throws SQLException {
         try (Connection conn = KoneksiDatabase.getKoneksi()) {
             return generateKodePelanggan(conn);
         }
     }
 
-    /**
-     * Mencari profil pelanggan berdasarkan ID Pelanggan.
-     */
+    // Fitur: Mencari profil pelanggan berdasarkan ID Pelanggan
     public Pelanggan cariBerdasarkanId(Long idPelanggan) throws SQLException {
         String sql = "SELECT p.*, u.nama_lengkap, u.nama_pengguna, u.kata_sandi_hash, u.nomor_telepon, u.status_aktif " +
                      "FROM pelanggan p " +
@@ -134,9 +116,7 @@ public class PelangganDAO {
         return null;
     }
 
-    /**
-     * Mencari profil pelanggan berdasarkan ID Pengguna (akun login).
-     */
+    // Fitur: Mencari profil pelanggan berdasarkan ID Pengguna (akun login)
     public Pelanggan cariBerdasarkanIdPengguna(Long idPengguna) throws SQLException {
         String sql = "SELECT p.*, u.nama_lengkap, u.nama_pengguna, u.kata_sandi_hash, u.nomor_telepon, u.status_aktif " +
                      "FROM pelanggan p " +
@@ -155,9 +135,7 @@ public class PelangganDAO {
         return null;
     }
 
-    /**
-     * Mencari pelanggan berdasarkan kata kunci (kode, nama, atau nomor telepon).
-     */
+    // Fitur: Mencari pelanggan berdasarkan kata kunci (kode, nama, atau nomor telepon)
     public List<Pelanggan> cariPelanggan(String keyword) throws SQLException {
         List<Pelanggan> hasil = new ArrayList<>();
         String sql = "SELECT p.*, u.nama_lengkap, u.nama_pengguna, u.kata_sandi_hash, u.nomor_telepon, u.status_aktif " +
@@ -181,9 +159,7 @@ public class PelangganDAO {
         return hasil;
     }
 
-    /**
-     * Mengambil seluruh daftar pelanggan.
-     */
+    // Fitur: Mengambil seluruh daftar pelanggan
     public List<Pelanggan> ambilSemuaPelanggan() throws SQLException {
         List<Pelanggan> hasil = new ArrayList<>();
         String sql = "SELECT p.*, u.nama_lengkap, u.nama_pengguna, u.kata_sandi_hash, u.nomor_telepon, u.status_aktif " +

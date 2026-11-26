@@ -9,11 +9,8 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-/**
- * DialogSetupAdminAwal
- * Ditampilkan secara otomatis saat aplikasi pertama kali dijalankan
- * jika tabel pengguna belum memiliki akun Admin sama sekali.
- */
+// Fitur: Setup Admin Pertama
+// OOP: Inheritance - DialogSetupAdminAwal mewarisi JDialog.
 public class DialogSetupAdminAwal extends JDialog {
 
     private final JTextField txtNamaLengkap = new JTextField(20);
@@ -39,7 +36,6 @@ public class DialogSetupAdminAwal extends JDialog {
         JPanel content = new JPanel(new BorderLayout());
         content.setBackground(TemaWarna.PUTIH);
 
-        // Header
         JPanel pnlHeader = new JPanel(new BorderLayout());
         pnlHeader.setBackground(TemaWarna.AMALFI_TILE);
         pnlHeader.setBorder(new EmptyBorder(18, 20, 18, 20));
@@ -56,7 +52,6 @@ public class DialogSetupAdminAwal extends JDialog {
         pnlHeader.add(lblSub, BorderLayout.SOUTH);
         content.add(pnlHeader, BorderLayout.NORTH);
 
-        // Form Fields
         JPanel pnlForm = new JPanel(new GridBagLayout());
         pnlForm.setBackground(TemaWarna.PUTIH);
         pnlForm.setBorder(new EmptyBorder(20, 24, 20, 24));
@@ -73,7 +68,7 @@ public class DialogSetupAdminAwal extends JDialog {
 
         content.add(pnlForm, BorderLayout.CENTER);
 
-        // Tombol Aksi
+        // Fitur: Buat Admin Pertama
         JPanel pnlBawah = new JPanel(new FlowLayout(FlowLayout.RIGHT, 12, 16));
         pnlBawah.setBackground(TemaWarna.LATAR_BELAKANG);
         pnlBawah.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, TemaWarna.ABU_BORDER));
@@ -87,6 +82,7 @@ public class DialogSetupAdminAwal extends JDialog {
         setContentPane(content);
     }
 
+    // Fitur: Tambah Baris Form
     private void tambahBarisForm(JPanel pnl, GridBagConstraints gbc, int y, String labelText, JComponent field) {
         gbc.gridx = 0;
         gbc.gridy = y;
@@ -103,6 +99,7 @@ public class DialogSetupAdminAwal extends JDialog {
         pnl.add(field, gbc);
     }
 
+    // Fitur: Proses Simpan
     private void prosesSimpan() {
         String nama = txtNamaLengkap.getText();
         String user = txtUsername.getText();

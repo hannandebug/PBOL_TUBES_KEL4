@@ -11,10 +11,8 @@ import java.awt.*;
 import java.math.BigDecimal;
 import java.util.Map;
 
-/**
- * PanelRingkasanAdmin
- * Menampilkan ringkasan metrik operasional dan keuangan secara terstruktur.
- */
+// Fitur: Ringkasan Admin
+// OOP: Inheritance - PanelRingkasanAdmin mewarisi JPanel.
 public class PanelRingkasanAdmin extends JPanel {
 
     private final KartuStatistik kTotalPelanggan = new KartuStatistik("Pelanggan Terdaftar", "0", TemaWarna.AMALFI_TILE);
@@ -48,19 +46,19 @@ public class PanelRingkasanAdmin extends JPanel {
         container.setBackground(TemaWarna.LATAR_BELAKANG);
         container.setBorder(new EmptyBorder(24, 24, 24, 24));
 
-        // Bagian 1: Ringkasan Umum
+        // Fitur: Ringkasan Umum
         container.add(buatLabelBagian("Gambaran Umum Usaha"));
         container.add(Box.createVerticalStrut(10));
         container.add(buatBarisKartu(kTotalPelanggan, kTotalPetugas, kTotalTransaksi, kPenerimaanJasa));
         container.add(Box.createVerticalStrut(24));
 
-        // Bagian 2: Status Cucian
+        // Fitur: Status Cucian
         container.add(buatLabelBagian("Pantauan Cucian Hari Ini"));
         container.add(Box.createVerticalStrut(10));
         container.add(buatBarisKartu(kMenungguBayar, kDiproses, kSiapAmbil, kSelesai));
         container.add(Box.createVerticalStrut(24));
 
-        // Bagian 3: Tindak Lanjut
+        // Fitur: Tindak Lanjut
         container.add(buatLabelBagian("Perlu Tindak Lanjut"));
         container.add(Box.createVerticalStrut(10));
         container.add(buatBarisKartu(kPengaduan, kPembatalan, kRefund, kTotalRefund));

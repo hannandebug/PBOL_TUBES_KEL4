@@ -10,19 +10,13 @@ import id.kelompok4.laundry.util.SessionManager;
 
 import java.sql.SQLException;
 
-/**
- * Service Autentikasi
- * Mengelola proses login, registrasi pelanggan mandiri, setup Admin awal,
- * serta validasi hak akses peran (Role-Based Access Control).
- */
+// Fitur: Login dan Registrasi Pengguna
 public class AutentikasiService {
 
     private final PenggunaDAO penggunaDAO = new PenggunaDAO();
     private final PelangganDAO pelangganDAO = new PelangganDAO();
 
-    /**
-     * Memeriksa apakah database masih kosong dari akun Admin.
-     */
+    // Fitur: Memeriksa apakah database masih kosong dari akun Admin
     public boolean apakahPerluSetupAdminAwal() {
         try {
             return penggunaDAO.hitungJumlahAdmin() == 0;
@@ -32,9 +26,7 @@ public class AutentikasiService {
         }
     }
 
-    /**
-     * Membuat akun Admin pertama kali.
-     */
+    // Fitur: Membuat akun Admin pertama kali
     public boolean setupAdminPertama(String namaLengkap, String namaPengguna, String password, String noTelp) throws Exception {
         if (namaLengkap == null || namaLengkap.trim().isEmpty()) {
             throw new IllegalArgumentException("Nama lengkap wajib diisi.");
@@ -46,7 +38,7 @@ public class AutentikasiService {
             throw new IllegalArgumentException("Password minimal 6 karakter.");
         }
 
-        // Cek duplikasi username
+        // Fitur: Validasi Username Duplikat
         if (penggunaDAO.cariBerdasarkanUsername(namaPengguna.trim()) != null) {
             throw new IllegalArgumentException("Username sudah digunakan. Silakan pilih username lain.");
         }
@@ -62,10 +54,7 @@ public class AutentikasiService {
         return penggunaDAO.tambahAdmin(admin);
     }
 
-    /**
-     * Memproses login pengguna (Admin, Petugas, atau Pelanggan).
-     * Menerima username ATAU nomor telepon sesuai flowchart login.
-     */
+    // Fitur: Memproses login pengguna (Admin, Petugas, atau Pelanggan)
     public Pengguna login(String usernameAtauTelp, String password) throws Exception {
         if (usernameAtauTelp == null || usernameAtauTelp.trim().isEmpty()) {
             throw new IllegalArgumentException("Username atau Nomor Telepon tidak boleh kosong.");
@@ -96,15 +85,12 @@ public class AutentikasiService {
             p.setKataSandiHash(hashBaru);
         }
 
-        // Simpan ke sesi aktif
+        // Fitur: Simpan Sesi Pengguna
         SessionManager.setPenggunaAktif(p);
         return p;
     }
 
-    /**
-     * Registrasi mandiri pelanggan baru.
-     * Role secara otomatis ditetapkan menjadi 'PELANGGAN'.
-     */
+    // Fitur: Registrasi mandiri pelanggan baru
     public boolean registrasiPelanggan(String namaLengkap, String username, String password, String noTelp, String alamat) throws Exception {
         if (namaLengkap == null || namaLengkap.trim().isEmpty()) {
             throw new IllegalArgumentException("Nama lengkap wajib diisi.");

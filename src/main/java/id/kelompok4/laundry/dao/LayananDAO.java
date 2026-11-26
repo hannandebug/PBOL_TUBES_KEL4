@@ -7,12 +7,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * DAO Layanan
- * Mengelola tabel jenis_layanan (CRUD).
- */
+// Fitur: Kelola Layanan
 public class LayananDAO {
 
+    // Fitur: Ambil Semua
     public List<JenisLayanan> ambilSemua() throws SQLException {
         List<JenisLayanan> list = new ArrayList<>();
         String sql = "SELECT * FROM jenis_layanan ORDER BY id_jenis_layanan ASC";
@@ -26,6 +24,7 @@ public class LayananDAO {
         return list;
     }
 
+    // Fitur: Ambil Semua Aktif
     public List<JenisLayanan> ambilSemuaAktif() throws SQLException {
         List<JenisLayanan> list = new ArrayList<>();
         String sql = "SELECT * FROM jenis_layanan WHERE status_aktif = 1 ORDER BY id_jenis_layanan ASC";
@@ -39,6 +38,7 @@ public class LayananDAO {
         return list;
     }
 
+    // Fitur: Tambah
     public boolean tambah(JenisLayanan layanan) throws SQLException {
         String sql = "INSERT INTO jenis_layanan (kode_layanan, nama_layanan, keterangan, status_aktif) VALUES (?, ?, ?, ?)";
         try (Connection conn = KoneksiDatabase.getKoneksi();
@@ -58,6 +58,7 @@ public class LayananDAO {
         return false;
     }
 
+    // Fitur: Ubah
     public boolean ubah(JenisLayanan layanan) throws SQLException {
         String sql = "UPDATE jenis_layanan SET nama_layanan = ?, keterangan = ?, status_aktif = ? WHERE id_jenis_layanan = ?";
         try (Connection conn = KoneksiDatabase.getKoneksi();

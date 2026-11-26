@@ -6,11 +6,8 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-/**
- * TombolKustom
- * Tombol modern dengan sudut membulat 10px, status hover/tekan yang responsif,
- * serta kontras warna yang jelas.
- */
+// Fitur: Komponen Tombol Antarmuka
+// OOP: Inheritance - TombolKustom mewarisi JButton.
 public class TombolKustom extends JButton {
 
     private final Color warnaLatar;

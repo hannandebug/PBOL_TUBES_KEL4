@@ -10,20 +10,14 @@ import id.kelompok4.laundry.model.TransaksiLaundry;
 import java.sql.SQLException;
 import java.util.List;
 
-/**
- * Service Pembatalan dan Refund
- * Mengatur alur pembatalan transaksi berbayar dan pencairan refund 100%.
- */
+// Fitur: Pembatalan dan Refund
 public class PembatalanRefundService {
 
     private final PembatalanDAO pembatalanDAO = new PembatalanDAO();
     private final PengembalianDanaDAO pengembalianDanaDAO = new PengembalianDanaDAO();
     private final TransaksiDAO transaksiDAO = new TransaksiDAO();
 
-    /**
-     * Pelanggan mengajukan pembatalan transaksi yang sudah dibayar.
-     * Aturan: Hanya boleh diajukan saat transaksi masih DITERIMA (belum DIPROSES).
-     */
+    // Fitur: Pelanggan mengajukan pembatalan transaksi yang sudah dibayar
     public PermohonanPembatalan ajukanPembatalan(Long idTransaksi, Long idPelanggan,
                                                  Long idPenggunaPemohon, String alasan) throws Exception {
         if (idTransaksi == null) throw new IllegalArgumentException("Pilih transaksi yang ingin dibatalkan.");
@@ -55,10 +49,7 @@ public class PembatalanRefundService {
         return pb;
     }
 
-    /**
-     * Admin memutuskan permohonan pembatalan.
-     * Jika disetujui, otomatis dibuat catatan pengembalian_dana sebesar 100% total biaya.
-     */
+    // Fitur: Admin memutuskan permohonan pembatalan
     public boolean putuskanPembatalanAdmin(Long idPermohonan, boolean disetujui, Long idAdmin, String catatan) throws Exception {
         PermohonanPembatalan pb = null;
         for (PermohonanPembatalan item : pembatalanDAO.ambilSemuaPermohonan()) {
@@ -89,10 +80,7 @@ public class PembatalanRefundService {
         return ok;
     }
 
-    /**
-     * Petugas kasir menyerahkan uang refund kepada pelanggan dan mencatat metode penyerahan.
-     * Trigger database trg_pengembalian_setelah_ubah otomatis membatalkan transaksi.
-     */
+    // Fitur: Petugas kasir menyerahkan uang refund kepada pelanggan dan mencatat metode penyerahan
     public boolean eksekusiBayarRefundKasir(Long idPengembalian, String metode, Long idPetugas) throws SQLException {
         if (metode == null || metode.trim().isEmpty()) {
             throw new IllegalArgumentException("Metode pengembalian dana harus dipilih (TUNAI / TRANSFER / QRIS).");
@@ -100,18 +88,22 @@ public class PembatalanRefundService {
         return pengembalianDanaDAO.eksekusiBayarRefundKasir(idPengembalian, metode, idPetugas);
     }
 
+    // Fitur: Ambil Semua Permohonan
     public List<PermohonanPembatalan> ambilSemuaPermohonan() throws SQLException {
         return pembatalanDAO.ambilSemuaPermohonan();
     }
 
+    // Fitur: Ambil Permohonan Pelanggan
     public List<PermohonanPembatalan> ambilPermohonanPelanggan(Long idPelanggan) throws SQLException {
         return pembatalanDAO.ambilPermohonanPelanggan(idPelanggan);
     }
 
+    // Fitur: Ambil Refund Menunggu
     public List<PengembalianDana> ambilRefundMenunggu() throws SQLException {
         return pengembalianDanaDAO.ambilRefundMenunggu();
     }
 
+    // Fitur: Ambil Semua Refund
     public List<PengembalianDana> ambilSemuaRefund() throws SQLException {
         return pengembalianDanaDAO.ambilSemuaRefund();
     }

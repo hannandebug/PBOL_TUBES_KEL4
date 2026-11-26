@@ -8,12 +8,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * DAO Tarif
- * Mengelola tabel tarif_layanan (CRUD harga per kg).
- */
+// Fitur: Kelola Tarif
 public class TarifDAO {
 
+    // Fitur: Ambil Semua Tarif
     public List<TarifLayanan> ambilSemuaTarif() throws SQLException {
         List<TarifLayanan> list = new ArrayList<>();
         String sql = "SELECT t.*, jl.nama_layanan, pl.nama_paket, pl.durasi_jam " +
@@ -32,6 +30,7 @@ public class TarifDAO {
         return list;
     }
 
+    // Fitur: Ambil Tarif Aktif
     public List<TarifLayanan> ambilTarifAktif() throws SQLException {
         List<TarifLayanan> list = new ArrayList<>();
         String sql = "SELECT t.*, jl.nama_layanan, pl.nama_paket, pl.durasi_jam " +
@@ -51,6 +50,7 @@ public class TarifDAO {
         return list;
     }
 
+    // Fitur: Cari Tarif
     public TarifLayanan cariTarif(Long idJenisLayanan, Long idPaket) throws SQLException {
         String sql = "SELECT t.*, jl.nama_layanan, pl.nama_paket, pl.durasi_jam " +
                      "FROM tarif_layanan t " +
@@ -71,6 +71,7 @@ public class TarifDAO {
         return null;
     }
 
+    // Fitur: Simpan Atau Update Tarif
     public boolean simpanAtauUpdateTarif(Long idJenisLayanan, Long idPaket, BigDecimal hargaPerKg, boolean aktif) throws SQLException {
         String sql = "INSERT INTO tarif_layanan (id_jenis_layanan, id_paket, harga_per_kg, status_aktif) " +
                      "VALUES (?, ?, ?, ?) " +

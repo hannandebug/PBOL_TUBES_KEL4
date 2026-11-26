@@ -15,10 +15,8 @@ import java.awt.*;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * PanelVerifikasiPembayaran
- * Antrean pesanan yang belum dibayar dan konfirmasi penerimaan uang oleh kasir.
- */
+// Fitur: Approve atau Tolak Pembayaran
+// OOP: Inheritance - PanelVerifikasiPembayaran mewarisi JPanel.
 public class PanelVerifikasiPembayaran extends JPanel {
 
     private final TransaksiService transaksiService = new TransaksiService();
@@ -48,7 +46,7 @@ public class PanelVerifikasiPembayaran extends JPanel {
     }
 
     private void initUI() {
-        // Bagian Atas: Antrean Belum Bayar
+        // Fitur: Lihat Antrean Pembayaran
         PanelKartu kartuAtas = new PanelKartu(new BorderLayout(0, 12), 18);
 
         JPanel pnlHeaderTabel = new JPanel(new BorderLayout());
@@ -68,7 +66,7 @@ public class PanelVerifikasiPembayaran extends JPanel {
         kartuAtas.add(TemaWarna.bungkusTabel(tabelAntrean), BorderLayout.CENTER);
         add(kartuAtas, BorderLayout.CENTER);
 
-        // Bagian Bawah: Form Konfirmasi Kasir
+        // Fitur: Verifikasi Pembayaran
         PanelKartu kartuBawah = new PanelKartu(new BorderLayout(0, 14), 20);
         kartuBawah.add(TemaWarna.buatJudulBagian("Konfirmasi Penerimaan Pembayaran"), BorderLayout.NORTH);
 
@@ -78,7 +76,7 @@ public class PanelVerifikasiPembayaran extends JPanel {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(6, 6, 6, 8);
 
-        // Baris 1: Metode Pembayaran & Petunjuk
+        // Fitur: Pilih Metode Pembayaran
         gbc.gridx = 0; gbc.gridy = 0; gbc.weightx = 0.15;
         JLabel lMet = new JLabel("Metode Bayar");
         lMet.setFont(TemaWarna.FONT_BOLD);
@@ -95,7 +93,7 @@ public class PanelVerifikasiPembayaran extends JPanel {
         pnlFields.add(lblPetunjukVerifikasi, gbc);
         gbc.gridwidth = 1;
 
-        // Baris 2: Nominal Pembayaran
+        // Fitur: Masukkan Nominal Pembayaran
         gbc.gridx = 0; gbc.gridy = 1; gbc.weightx = 0.15;
         JLabel lNom = new JLabel("Nominal Bayar *");
         lNom.setFont(TemaWarna.FONT_BOLD);
@@ -122,7 +120,7 @@ public class PanelVerifikasiPembayaran extends JPanel {
 
         kartuBawah.add(pnlFields, BorderLayout.CENTER);
 
-        // Tombol Aksi
+        // Fitur: Approve atau Tolak Pembayaran
         JPanel pnlTombol = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 0));
         pnlTombol.setOpaque(false);
 
@@ -192,6 +190,7 @@ public class PanelVerifikasiPembayaran extends JPanel {
         }
     }
 
+    // Fitur: Approve Pembayaran
     private void prosesApprove() {
         int baris = tabelAntrean.getSelectedRow();
         if (baris < 0) {
@@ -295,6 +294,7 @@ public class PanelVerifikasiPembayaran extends JPanel {
         }
     }
 
+    // Fitur: Tolak Pembayaran
     private void prosesTolak() {
         int baris = tabelAntrean.getSelectedRow();
         if (baris < 0) {

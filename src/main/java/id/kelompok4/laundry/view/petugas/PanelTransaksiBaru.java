@@ -20,10 +20,8 @@ import java.awt.*;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * PanelTransaksiBaru
- * Formulir pencatatan pesanan cucian baru di meja kasir.
- */
+// Fitur: Buat Transaksi Baru
+// OOP: Inheritance - PanelTransaksiBaru mewarisi JPanel.
 public class PanelTransaksiBaru extends JPanel {
 
     private final PelangganDAO pelangganDAO = new PelangganDAO();
@@ -60,7 +58,7 @@ public class PanelTransaksiBaru extends JPanel {
         JPanel rootForm = new JPanel(new GridLayout(1, 2, 20, 0));
         rootForm.setOpaque(false);
 
-        // Kartu Kiri: Data Pesanan
+        // Fitur: Isi Data Pesanan
         PanelKartu pnlKiri = new PanelKartu(new BorderLayout(0, 14), 22);
         pnlKiri.add(TemaWarna.buatJudulBagian("Data Cucian Pelanggan"), BorderLayout.NORTH);
 
@@ -72,7 +70,7 @@ public class PanelTransaksiBaru extends JPanel {
 
         int row = 0;
 
-        // Cari Pelanggan
+        // Fitur: Cari Pelanggan
         gbc.gridx = 0; gbc.gridy = row; gbc.weightx = 0.35;
         formFields.add(buatLabel("Cari Pelanggan"), gbc);
         gbc.gridx = 1; gbc.weightx = 0.65;
@@ -87,7 +85,7 @@ public class PanelTransaksiBaru extends JPanel {
         formFields.add(pnlCari, gbc);
         row++;
 
-        // Pilih Pelanggan
+        // Fitur: Pilih Pelanggan
         gbc.gridx = 0; gbc.gridy = row; gbc.weightx = 0.35;
         formFields.add(buatLabel("Pelanggan *"), gbc);
         gbc.gridx = 1; gbc.weightx = 0.65;
@@ -95,7 +93,7 @@ public class PanelTransaksiBaru extends JPanel {
         formFields.add(cmbPelanggan, gbc);
         row++;
 
-        // Layanan
+        // Fitur: Pilih Layanan
         gbc.gridx = 0; gbc.gridy = row; gbc.weightx = 0.35;
         formFields.add(buatLabel("Jenis Layanan *"), gbc);
         gbc.gridx = 1; gbc.weightx = 0.65;
@@ -104,7 +102,7 @@ public class PanelTransaksiBaru extends JPanel {
         formFields.add(cmbLayanan, gbc);
         row++;
 
-        // Paket
+        // Fitur: Pilih Paket Laundry
         gbc.gridx = 0; gbc.gridy = row; gbc.weightx = 0.35;
         formFields.add(buatLabel("Paket *"), gbc);
         gbc.gridx = 1; gbc.weightx = 0.65;
@@ -113,7 +111,7 @@ public class PanelTransaksiBaru extends JPanel {
         formFields.add(cmbPaket, gbc);
         row++;
 
-        // Berat
+        // Fitur: Masukkan Berat Cucian
         gbc.gridx = 0; gbc.gridy = row; gbc.weightx = 0.35;
         formFields.add(buatLabel("Berat Timbang (kg) *"), gbc);
         gbc.gridx = 1; gbc.weightx = 0.65;
@@ -127,7 +125,7 @@ public class PanelTransaksiBaru extends JPanel {
         formFields.add(txtBeratAktual, gbc);
         row++;
 
-        // Checkbox Minimum
+        // Fitur: Setujui Biaya Minimum
         gbc.gridx = 0; gbc.gridy = row; gbc.gridwidth = 2;
         chkSetujuMinimum.setFont(TemaWarna.FONT_KECIL);
         chkSetujuMinimum.setForeground(TemaWarna.TEKS_GELAP);
@@ -138,7 +136,7 @@ public class PanelTransaksiBaru extends JPanel {
         gbc.gridwidth = 1;
         row++;
 
-        // Catatan
+        // Fitur: Tambahkan Catatan Transaksi
         gbc.gridx = 0; gbc.gridy = row; gbc.weightx = 0.35; gbc.anchor = GridBagConstraints.NORTHWEST;
         JLabel lblCat = buatLabel("Catatan");
         lblCat.setBorder(new EmptyBorder(6, 0, 0, 0));
@@ -154,7 +152,7 @@ public class PanelTransaksiBaru extends JPanel {
         pnlKiri.add(formFields, BorderLayout.CENTER);
         rootForm.add(pnlKiri);
 
-        // Kartu Kanan: Ringkasan Biaya
+        // Fitur: Lihat Ringkasan Biaya
         PanelKartu pnlKanan = new PanelKartu(new BorderLayout(0, 16), 24);
         pnlKanan.add(TemaWarna.buatJudulBagian("Ringkasan Biaya"), BorderLayout.NORTH);
 
@@ -183,7 +181,6 @@ public class PanelTransaksiBaru extends JPanel {
         pnlRincian.add(buatBarisRincian("Total Bayar", lblTotalBiaya));
         pnlRincian.add(Box.createVerticalStrut(24));
 
-        // Info kotak lembut
         JPanel pnlInfo = new JPanel(new BorderLayout());
         pnlInfo.setBackground(TemaWarna.LATAR_BELAKANG);
         pnlInfo.setBorder(BorderFactory.createCompoundBorder(
@@ -248,6 +245,7 @@ public class PanelTransaksiBaru extends JPanel {
         }
     }
 
+    // Fitur: Cari Pelanggan
     private void cariPelanggan() {
         try {
             String kw = txtCariPelanggan.getText();
@@ -324,6 +322,7 @@ public class PanelTransaksiBaru extends JPanel {
         chkSetujuMinimum.setSelected(false);
     }
 
+    // Fitur: Proses Simpan Transaksi
     private void prosesSimpanTransaksi() {
         Pelanggan pel = (Pelanggan) cmbPelanggan.getSelectedItem();
         if (pel == null) {

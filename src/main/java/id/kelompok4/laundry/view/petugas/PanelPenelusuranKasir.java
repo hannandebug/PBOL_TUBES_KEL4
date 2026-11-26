@@ -12,10 +12,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
 
-/**
- * PanelPenelusuranKasir
- * Daftar tugas pengecekan barang bermasalah dari pemilik gerai.
- */
+// Fitur: Penelusuran Pengaduan
+// OOP: Inheritance - PanelPenelusuranKasir mewarisi JPanel.
 public class PanelPenelusuranKasir extends JPanel {
 
     private final PengaduanService pengaduanService = new PengaduanService();
@@ -82,6 +80,7 @@ public class PanelPenelusuranKasir extends JPanel {
         }
     }
 
+    // Fitur: Proses Input Hasil
     private void prosesInputHasil() {
         int baris = tabelTugas.getSelectedRow();
         if (baris < 0) {

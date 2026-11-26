@@ -13,10 +13,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
 
-/**
- * PanelLayananPelanggan
- * Daftar layanan, paket, durasi, dan tarif resmi yang berlaku di gerai.
- */
+// Fitur: Lihat Layanan dan Tarif
+// OOP: Inheritance - PanelLayananPelanggan mewarisi JPanel.
 public class PanelLayananPelanggan extends JPanel {
 
     private final TarifDAO tarifDAO = new TarifDAO();

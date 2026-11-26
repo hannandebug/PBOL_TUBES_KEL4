@@ -1,10 +1,7 @@
 package id.kelompok4.laundry.model;
 
-/**
- * Class Petugas
- * Subclass dari Pengguna yang merepresentasikan Petugas / Kasir Laundry.
- * Menerapkan prinsip Inheritance dan Method Overriding.
- */
+// OOP: Inheritance - subclass ini mewarisi data dan perilaku dari Pengguna.
+// OOP: Polymorphism - perilaku peran disediakan melalui method overriding.
 public class Petugas extends Pengguna {
 
     public Petugas() {

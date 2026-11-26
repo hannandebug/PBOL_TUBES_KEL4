@@ -12,20 +12,14 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 
-/**
- * Service Pengaduan
- * Mengelola komplain pelanggan (Hilang, Rusak, Tertukar), penugasan penelusuran,
- * penetapan tanggung jawab, dan musyawarah penyelesaian.
- */
+// Fitur: Pengaduan dan Penyelesaian
 public class PengaduanService {
 
     private final PengaduanDAO pengaduanDAO = new PengaduanDAO();
     private final PenyelesaianDAO penyelesaianDAO = new PenyelesaianDAO();
     private final TransaksiDAO transaksiDAO = new TransaksiDAO();
 
-    /**
-     * Pelanggan mengajukan komplain cucian.
-     */
+    // Fitur: Pelanggan mengajukan komplain cucian
     public Pengaduan ajukanPengaduan(Long idTransaksi, Long idPelanggan, Long idPenggunaPelapor,
                                      String jenisPengaduan, String deskripsiPakaian,
                                      int jumlahPakaian, String uraianKejadian) throws Exception {
@@ -67,22 +61,27 @@ public class PengaduanService {
         return p;
     }
 
+    // Fitur: Ambil Semua Pengaduan
     public List<Pengaduan> ambilSemuaPengaduan() throws SQLException {
         return pengaduanDAO.ambilSemuaPengaduan();
     }
 
+    // Fitur: Ambil Pengaduan Pelanggan
     public List<Pengaduan> ambilPengaduanPelanggan(Long idPelanggan) throws SQLException {
         return pengaduanDAO.ambilPengaduanPelanggan(idPelanggan);
     }
 
+    // Fitur: Ambil Tugas Penelusuran Petugas
     public List<Pengaduan> ambilTugasPenelusuranPetugas() throws SQLException {
         return pengaduanDAO.ambilTugasPenelusuranPetugas();
     }
 
+    // Fitur: Tugaskan Penelusuran
     public boolean tugaskanPenelusuran(Long idPengaduan, Long idAdmin, Long idPetugas, Timestamp batasWaktu) throws SQLException {
         return pengaduanDAO.updateTugaskanPenelusuran(idPengaduan, idAdmin, idPetugas, batasWaktu);
     }
 
+    // Fitur: Simpan Hasil Penelusuran
     public boolean isiHasilPenelusuran(Long idPengaduan, String hasil, Long idPetugas) throws SQLException {
         return pengaduanDAO.updateHasilPenelusuranPetugas(idPengaduan, hasil, idPetugas);
     }
@@ -91,6 +90,7 @@ public class PengaduanService {
         return pengaduanDAO.updateKeputusanAdmin(idPengaduan, statusTanggungJawab, statusPengaduan, idAdmin);
     }
 
+    // Fitur: Ajukan Penyelesaian
     public boolean ajukanPenyelesaian(Long idPengaduan, Long idPelanggan, String jenisPenyelesaian,
                                       String alasan, BigDecimal nominal, Long idAdmin, String catatan) throws SQLException {
         PenyelesaianPengaduan p = new PenyelesaianPengaduan();
@@ -105,10 +105,12 @@ public class PengaduanService {
         return penyelesaianDAO.tambahPenyelesaian(p);
     }
 
+    // Fitur: Cari Penyelesaian
     public PenyelesaianPengaduan cariPenyelesaian(Long idPengaduan) throws SQLException {
         return penyelesaianDAO.cariBerdasarkanPengaduanId(idPengaduan);
     }
 
+    // Fitur: Simpan Tanggapan Pelanggan
     public boolean responPelanggan(Long idPenyelesaian, Long idPengaduan, boolean setuju) throws SQLException {
         String statusPersetujuan = setuju ? "DISETUJUI_PELANGGAN" : "DITOLAK_PELANGGAN";
         String statusPengaduan = setuju ? "DALAM_PENYELESAIAN" : "SOLUSI_DITOLAK";
@@ -121,6 +123,7 @@ public class PengaduanService {
         return ok;
     }
 
+    // Fitur: Tandai Pengaduan Selesai
     public boolean tandaiPenyelesaianSelesai(Long idPengaduan, Long idAdmin) throws SQLException {
         boolean ok = penyelesaianDAO.tandaiSelesai(idPengaduan, idAdmin);
         if (!ok) {

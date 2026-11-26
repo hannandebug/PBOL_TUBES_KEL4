@@ -12,10 +12,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
 
-/**
- * PanelKelolaPetugas
- * Mengelola daftar akun petugas/kasir gerai.
- */
+// Fitur: Kelola Petugas
+// OOP: Inheritance - PanelKelolaPetugas mewarisi JPanel.
 public class PanelKelolaPetugas extends JPanel {
 
     private final PenggunaDAO penggunaDAO = new PenggunaDAO();
@@ -37,7 +35,7 @@ public class PanelKelolaPetugas extends JPanel {
     private void initUI() {
         PanelKartu kartu = new PanelKartu(new BorderLayout(0, 16), 20);
 
-        // Header & Toolbar
+        // Fitur: Tambah dan Ubah Petugas
         JPanel pnlAtas = new JPanel(new BorderLayout(0, 10));
         pnlAtas.setOpaque(false);
 
@@ -77,7 +75,7 @@ public class PanelKelolaPetugas extends JPanel {
         pnlAtas.add(pnlToolbar, BorderLayout.CENTER);
         kartu.add(pnlAtas, BorderLayout.NORTH);
 
-        // Tabel Petugas
+        // Fitur: Lihat Daftar Petugas
         tabelPetugas.sembunyikanKolom(0);
         tabelPetugas.getColumnModel().getColumn(4).setCellRenderer(new BadgeStatusRenderer());
         kartu.add(TemaWarna.bungkusTabel(tabelPetugas), BorderLayout.CENTER);
@@ -104,6 +102,7 @@ public class PanelKelolaPetugas extends JPanel {
         }
     }
 
+    // Fitur: Dialog Tambah Petugas
     private void dialogTambahPetugas() {
         JTextField txtNama = new JTextField(18);
         JTextField txtUser = new JTextField(18);
@@ -154,6 +153,7 @@ public class PanelKelolaPetugas extends JPanel {
         }
     }
 
+    // Fitur: Dialog Ubah Petugas
     private void dialogUbahPetugas() {
         int baris = tabelPetugas.getSelectedRow();
         if (baris < 0) {
@@ -205,6 +205,7 @@ public class PanelKelolaPetugas extends JPanel {
         }
     }
 
+    // Fitur: Proses Toggle Status
     private void prosesToggleStatus() {
         int baris = tabelPetugas.getSelectedRow();
         if (baris < 0) {
@@ -233,6 +234,7 @@ public class PanelKelolaPetugas extends JPanel {
         }
     }
 
+    // Fitur: Proses Reset Password
     private void prosesResetPassword() {
         int baris = tabelPetugas.getSelectedRow();
         if (baris < 0) {

@@ -2,12 +2,8 @@ package id.kelompok4.laundry.util;
 
 import id.kelompok4.laundry.model.Pengguna;
 
-/**
- * Utilitas SessionManager
- * Menyimpan data pengguna yang sedang login saat ini di memori aplikasi.
- * Menerapkan prinsip Polymorphism: atribut bertipe induk Pengguna,
- * dapat menampung objek Admin, Petugas, atau Pelanggan.
- */
+// Fitur: Kelola Sesi Pengguna
+// OOP: Polymorphism - sesi menyimpan objek melalui tipe induk Pengguna.
 public class SessionManager {
 
     private static Pengguna penggunaAktif = null;
@@ -24,6 +20,7 @@ public class SessionManager {
         return penggunaAktif != null;
     }
 
+    // Fitur: Logout
     public static synchronized void logout() {
         penggunaAktif = null;
     }

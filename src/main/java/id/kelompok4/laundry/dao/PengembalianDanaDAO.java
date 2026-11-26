@@ -9,13 +9,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * DAO PengembalianDana
- * Menangani pembuatan refund oleh Admin dan pencairan uang oleh Petugas.
- * Trigger database trg_pengembalian_setelah_ubah otomatis membatalkan transaksi ketika status refund menjadi DIBAYAR.
- */
+// Fitur: Kelola Refund
 public class PengembalianDanaDAO {
 
+    // Fitur: Buat Pengembalian Dana
     public boolean buatPengembalianDana(PengembalianDana p) throws SQLException {
         String sql = "INSERT INTO pengembalian_dana " +
                      "(nomor_pengembalian, id_transaksi, id_permohonan_pembatalan, id_penyelesaian, " +
@@ -46,6 +43,7 @@ public class PengembalianDanaDAO {
         return false;
     }
 
+    // Fitur: Ambil Semua Refund
     public List<PengembalianDana> ambilSemuaRefund() throws SQLException {
         List<PengembalianDana> list = new ArrayList<>();
         String sql = "SELECT r.*, t.nomor_transaksi, u.nama_lengkap AS nama_pelanggan " +
@@ -65,6 +63,7 @@ public class PengembalianDanaDAO {
         return list;
     }
 
+    // Fitur: Ambil Refund Menunggu
     public List<PengembalianDana> ambilRefundMenunggu() throws SQLException {
         List<PengembalianDana> list = new ArrayList<>();
         String sql = "SELECT r.*, t.nomor_transaksi, u.nama_lengkap AS nama_pelanggan " +
@@ -85,6 +84,7 @@ public class PengembalianDanaDAO {
         return list;
     }
 
+    // Fitur: Cairkan Refund
     public boolean eksekusiBayarRefundKasir(Long idPengembalian, String metode, Long idPetugas) throws SQLException {
         String sql = "UPDATE pengembalian_dana SET status_pengembalian = 'DIBAYAR', metode_pengembalian = ?, " +
                      "waktu_pengembalian = CURRENT_TIMESTAMP, dibayarkan_oleh = ? " +
@@ -112,6 +112,7 @@ public class PengembalianDanaDAO {
         }
     }
 
+    // Fitur: Generate Nomor Pengembalian Baru
     public String generateNomorPengembalianBaru() throws SQLException {
         String tgl = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         String prefix = "RFD-" + tgl + "-";

@@ -2,10 +2,8 @@ package model;
 
 import java.sql.Timestamp;
 
-/**
- * Model Pengaduan
- * Merepresentasikan tabel pengaduan saat pelanggan melaporkan masalah cucian (Hilang, Rusak, Tertukar).
- */
+// OOP: Class - Pengaduan merepresentasikan entitas domain.
+// OOP: Encapsulation - data objek disimpan pada atribut private.
 public class Pengaduan {
 
     private Long idPengaduan;
@@ -13,21 +11,20 @@ public class Pengaduan {
     private Long idTransaksi;
     private Long idPelanggan;
     private Long idPenggunaPelapor;
-    private String jenisPengaduan; // 'HILANG', 'RUSAK', 'TERTUKAR'
+    private String jenisPengaduan;
     private String deskripsiPakaian;
     private int jumlahPakaian;
     private String uraianKejadian;
     private Timestamp tanggalLapor;
     private Timestamp batasWaktuPenelusuran;
     private String hasilPenelusuran;
-    private String statusTanggungJawab; // 'BELUM_DITENTUKAN', 'TANGGUNG_JAWAB_PENUH', 'TANGGUNG_JAWAB_SEBAGIAN', 'BUKAN_TANGGUNG_JAWAB_LAUNDRY'
-    private String statusPengaduan; // 'DILAPORKAN', 'DIVERIFIKASI', 'DALAM_PENELUSURAN', 'MENUNGGU_PERSETUJUAN', 'SOLUSI_DITOLAK', 'DALAM_PENYELESAIAN', 'SELESAI', 'DITOLAK'
+    private String statusTanggungJawab;
+    private String statusPengaduan;
     private Long idAdminPemeriksa;
     private Long idPetugasPembantu;
     private Timestamp waktuPemeriksaan;
     private Long idPenggunaTerakhirMemperbarui;
 
-    // Helper tampilan
     private String nomorTransaksi;
     private String namaPelanggan;
     private String nomorTeleponPelanggan;

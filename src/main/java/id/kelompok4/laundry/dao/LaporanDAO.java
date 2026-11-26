@@ -12,16 +12,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * DAO Laporan
- * Mengambil ringkasan statistik operasional dan data finansial dari database & view.
- * Mencegah manipulasi angka palsu: seluruh data diambil dari database sebenarnya.
- */
+// Fitur: Laporan Operasional dan Keuangan
 public class LaporanDAO {
 
-    /**
-     * Mengambil ringkasan metrik untuk Dashboard Admin/Pemilik.
-     */
+    // Fitur: Mengambil ringkasan metrik untuk Dashboard Admin/Pemilik
     public Map<String, Object> ambilRingkasanAdmin() throws SQLException {
         Map<String, Object> map = new HashMap<>();
 
@@ -66,9 +60,7 @@ public class LaporanDAO {
         return map;
     }
 
-    /**
-     * Mengambil ringkasan operasional untuk Dashboard Petugas/Kasir.
-     */
+    // Fitur: Mengambil ringkasan operasional untuk Dashboard Petugas/Kasir
     public Map<String, Object> ambilRingkasanPetugas() throws SQLException {
         Map<String, Object> map = new HashMap<>();
 
@@ -97,9 +89,7 @@ public class LaporanDAO {
         return map;
     }
 
-    /**
-     * Mengambil ringkasan personal untuk Dashboard Pelanggan.
-     */
+    // Fitur: Mengambil ringkasan personal untuk Dashboard Pelanggan
     public Map<String, Object> ambilRingkasanPelanggan(Long idPelanggan) throws SQLException {
         Map<String, Object> map = new HashMap<>();
 
@@ -122,10 +112,7 @@ public class LaporanDAO {
         return map;
     }
 
-    /**
-     * Mengambil riwayat arus kas keuangan (Pemasukan jasa, Pengeluaran refund, dan Kompensasi).
-     * Sesuai ketentuan Flowchart Pemilik: 'Lihat laporan keuangan yang sudah dikelola sistem'.
-     */
+    // Fitur: Mengambil riwayat arus kas keuangan (Pemasukan jasa, Pengeluaran refund, dan Kompensasi)
     public List<Map<String, Object>> ambilLaporanArusKas() throws SQLException {
         List<Map<String, Object>> list = new ArrayList<>();
         try (Connection conn = KoneksiDatabase.getKoneksi()) {

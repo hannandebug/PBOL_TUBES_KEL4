@@ -1,11 +1,7 @@
 package model;
 
-/**
- * Class Pelanggan
- * Subclass dari Pengguna yang merepresentasikan Pelanggan Laundry.
- * Memiliki relasi 1-to-1 dengan tabel pelanggan di database.
- * Menerapkan prinsip Inheritance, Encapsulation, dan Method Overriding.
- */
+// OOP: Inheritance - subclass ini mewarisi data dan perilaku dari Pengguna.
+// OOP: Polymorphism - perilaku peran disediakan melalui method overriding.
 public class Pelanggan extends Pengguna {
 
     private Long idPelanggan;
@@ -38,7 +34,6 @@ public class Pelanggan extends Pengguna {
         return "Pengguna layanan laundry: pantau status cucian, lihat riwayat, cetak struk, dan ajukan pengaduan.";
     }
 
-    // Getter dan Setter khusus profil Pelanggan
     public Long getIdPelanggan() { return idPelanggan; }
     public void setIdPelanggan(Long idPelanggan) { this.idPelanggan = idPelanggan; }
 

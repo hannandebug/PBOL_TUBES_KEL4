@@ -3,10 +3,8 @@ package model;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-/**
- * Model PenyelesaianPengaduan
- * Merepresentasikan tabel penyelesaian_pengaduan.
- */
+// OOP: Class - PenyelesaianPengaduan merepresentasikan entitas domain.
+// OOP: Encapsulation - data objek disimpan pada atribut private.
 public class PenyelesaianPengaduan {
 
     private Long idPenyelesaian;
@@ -15,15 +13,14 @@ public class PenyelesaianPengaduan {
     private String jenisPenyelesaian;
     private String alasanPenyelesaian;
     private BigDecimal nominalDisepakati;
-    private String statusPersetujuan; // 'MENUNGGU', 'DISETUJUI_PELANGGAN', 'DITOLAK_PELANGGAN'
+    private String statusPersetujuan;
     private Timestamp waktuPelangganMerespons;
     private Long idAdminPenetap;
-    private String statusPelaksanaan; // 'BELUM_DILAKSANAKAN', 'DALAM_PROSES', 'SELESAI', 'DIBATALKAN'
+    private String statusPelaksanaan;
     private Long dilaksanakanOleh;
     private Timestamp waktuPelaksanaan;
     private String catatan;
 
-    // Helper tampilan
     private String nomorPengaduan;
     private String namaAdminPenetap;
 

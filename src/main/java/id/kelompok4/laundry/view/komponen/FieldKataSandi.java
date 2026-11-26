@@ -4,9 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Path2D;
 
-/**
- * Field kata sandi dengan tombol mata untuk mengubah visibilitas teks.
- */
+// Fitur: Tampilkan atau Sembunyikan Kata Sandi
+// OOP: Inheritance - FieldKataSandi mewarisi JPanel.
 public class FieldKataSandi extends JPanel {
 
     public FieldKataSandi(JPasswordField field) {

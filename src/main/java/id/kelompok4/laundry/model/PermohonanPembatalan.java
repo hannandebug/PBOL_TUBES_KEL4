@@ -2,11 +2,8 @@ package id.kelompok4.laundry.model;
 
 import java.sql.Timestamp;
 
-/**
- * Model PermohonanPembatalan
- * Merepresentasikan tabel permohonan_pembatalan.
- * Hanya sah diajukan pelanggan saat status transaksi masih 'DITERIMA' (belum diproses).
- */
+// OOP: Class - PermohonanPembatalan merepresentasikan entitas domain.
+// OOP: Encapsulation - data objek disimpan pada atribut private.
 public class PermohonanPembatalan {
 
     private Long idPermohonanPembatalan;
@@ -15,13 +12,12 @@ public class PermohonanPembatalan {
     private Long idPelanggan;
     private Long idPenggunaPemohon;
     private String alasanPembatalan;
-    private String statusPermohonan; // 'DIAJUKAN', 'DISETUJUI', 'DITOLAK', 'SELESAI'
+    private String statusPermohonan;
     private Timestamp diajukanPada;
     private Long diputuskanOlehAdmin;
     private Timestamp waktuKeputusan;
     private String catatanAdmin;
 
-    // Helper tampilan
     private String nomorTransaksi;
     private String namaPelanggan;
 

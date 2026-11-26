@@ -9,12 +9,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * DAO Pengaduan
- * Mengelola pengaduan pelanggan terkait cucian (Hilang, Rusak, Tertukar).
- */
+// Fitur: Kelola Pengaduan
 public class PengaduanDAO {
 
+    // Fitur: Tambah Pengaduan
     public boolean tambahPengaduan(Pengaduan p) throws SQLException {
         String sql = "INSERT INTO pengaduan " +
                      "(nomor_pengaduan, id_transaksi, id_pelanggan, id_pengguna_pelapor, jenis_pengaduan, " +
@@ -45,6 +43,7 @@ public class PengaduanDAO {
         return false;
     }
 
+    // Fitur: Ambil Semua Pengaduan
     public List<Pengaduan> ambilSemuaPengaduan() throws SQLException {
         List<Pengaduan> list = new ArrayList<>();
         String sql = "SELECT p.*, t.nomor_transaksi, u.nama_lengkap AS nama_pelanggan, u.nomor_telepon " +
@@ -64,6 +63,7 @@ public class PengaduanDAO {
         return list;
     }
 
+    // Fitur: Ambil Pengaduan Pelanggan
     public List<Pengaduan> ambilPengaduanPelanggan(Long idPelanggan) throws SQLException {
         List<Pengaduan> list = new ArrayList<>();
         String sql = "SELECT p.*, t.nomor_transaksi, u.nama_lengkap AS nama_pelanggan, u.nomor_telepon " +
@@ -86,6 +86,7 @@ public class PengaduanDAO {
         return list;
     }
 
+    // Fitur: Ambil Tugas Penelusuran Petugas
     public List<Pengaduan> ambilTugasPenelusuranPetugas() throws SQLException {
         List<Pengaduan> list = new ArrayList<>();
         String sql = "SELECT p.*, t.nomor_transaksi, u.nama_lengkap AS nama_pelanggan, u.nomor_telepon " +
@@ -106,6 +107,7 @@ public class PengaduanDAO {
         return list;
     }
 
+    // Fitur: Cari Berdasarkan ID
     public Pengaduan cariBerdasarkanId(Long idPengaduan) throws SQLException {
         String sql = "SELECT p.*, t.nomor_transaksi, u.nama_lengkap AS nama_pelanggan, u.nomor_telepon " +
                      "FROM pengaduan p " +
@@ -126,6 +128,7 @@ public class PengaduanDAO {
         return null;
     }
 
+    // Fitur: Update Tugaskan Penelusuran
     public boolean updateTugaskanPenelusuran(Long idPengaduan, Long idAdmin, Long idPetugas, Timestamp batasWaktu) throws SQLException {
         String sql = "UPDATE pengaduan SET status_pengaduan = 'DALAM_PENELUSURAN', id_admin_pemeriksa = ?, " +
                      "id_petugas_pembantu = ?, batas_waktu_penelusuran = ?, waktu_pemeriksaan = CURRENT_TIMESTAMP " +
@@ -141,6 +144,7 @@ public class PengaduanDAO {
         }
     }
 
+    // Fitur: Update Hasil Penelusuran Petugas
     public boolean updateHasilPenelusuranPetugas(Long idPengaduan, String hasil, Long idPetugas) throws SQLException {
         String sql = "UPDATE pengaduan SET hasil_penelusuran = ?, id_pengguna_terakhir_memperbarui = ? WHERE id_pengaduan = ?";
 
@@ -153,6 +157,7 @@ public class PengaduanDAO {
         }
     }
 
+    // Fitur: Update Keputusan Admin
     public boolean updateKeputusanAdmin(Long idPengaduan, String statusTanggungJawab, String statusPengaduan, Long idAdmin) throws SQLException {
         String sql = "UPDATE pengaduan SET status_tanggung_jawab = ?, status_pengaduan = ?, id_admin_pemeriksa = ?, id_pengguna_terakhir_memperbarui = ? " +
                      "WHERE id_pengaduan = ?";
@@ -168,6 +173,7 @@ public class PengaduanDAO {
         }
     }
 
+    // Fitur: Update Status Pengaduan
     public boolean updateStatusPengaduan(Long idPengaduan, String statusPengaduan) throws SQLException {
         String sql = "UPDATE pengaduan SET status_pengaduan = ? WHERE id_pengaduan = ?";
 
@@ -179,6 +185,7 @@ public class PengaduanDAO {
         }
     }
 
+    // Fitur: Generate Nomor Pengaduan Baru
     public String generateNomorPengaduanBaru() throws SQLException {
         String tgl = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         String prefix = "PGD-" + tgl + "-";

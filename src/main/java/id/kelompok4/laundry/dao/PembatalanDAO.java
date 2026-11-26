@@ -9,12 +9,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * DAO PermohonanPembatalan
- * Menangani pengajuan pembatalan transaksi oleh Pelanggan dan persetujuan oleh Admin.
- */
+// Fitur: Kelola Pembatalan
 public class PembatalanDAO {
 
+    // Fitur: Ajukan Pembatalan
     public boolean ajukanPembatalan(PermohonanPembatalan p) throws SQLException {
         String sql = "INSERT INTO permohonan_pembatalan " +
                      "(nomor_permohonan, id_transaksi, id_pelanggan, id_pengguna_pemohon, alasan_pembatalan, status_permohonan) " +
@@ -39,6 +37,7 @@ public class PembatalanDAO {
         return false;
     }
 
+    // Fitur: Ambil Semua Permohonan
     public List<PermohonanPembatalan> ambilSemuaPermohonan() throws SQLException {
         List<PermohonanPembatalan> list = new ArrayList<>();
         String sql = "SELECT pb.*, t.nomor_transaksi, u.nama_lengkap AS nama_pelanggan " +
@@ -58,6 +57,7 @@ public class PembatalanDAO {
         return list;
     }
 
+    // Fitur: Ambil Permohonan Pelanggan
     public List<PermohonanPembatalan> ambilPermohonanPelanggan(Long idPelanggan) throws SQLException {
         List<PermohonanPembatalan> list = new ArrayList<>();
         String sql = "SELECT pb.*, t.nomor_transaksi, u.nama_lengkap AS nama_pelanggan " +
@@ -79,6 +79,7 @@ public class PembatalanDAO {
         return list;
     }
 
+    // Fitur: Cari Berdasarkan Transaksi ID
     public PermohonanPembatalan cariBerdasarkanTransaksiId(Long idTransaksi) throws SQLException {
         String sql = "SELECT pb.*, t.nomor_transaksi, u.nama_lengkap AS nama_pelanggan " +
                      "FROM permohonan_pembatalan pb " +
@@ -99,6 +100,7 @@ public class PembatalanDAO {
         return null;
     }
 
+    // Fitur: Putuskan Admin
     public boolean putuskanAdmin(Long idPermohonan, String statusBaru, Long idAdmin, String catatan) throws SQLException {
         String sql = "UPDATE permohonan_pembatalan SET status_permohonan = ?, diputuskan_oleh_admin = ?, " +
                      "waktu_keputusan = CURRENT_TIMESTAMP, catatan_admin = ? WHERE id_permohonan_pembatalan = ?";
@@ -113,6 +115,7 @@ public class PembatalanDAO {
         }
     }
 
+    // Fitur: Generate Nomor Permohonan Baru
     public String generateNomorPermohonanBaru() throws SQLException {
         String tgl = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         String prefix = "BTL-" + tgl + "-";
