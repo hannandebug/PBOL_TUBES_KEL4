@@ -1,0 +1,6 @@
+target/
+.idea/
+.vscode/
+database.properties
+database/database.properties
+src/main/resources/database.properties

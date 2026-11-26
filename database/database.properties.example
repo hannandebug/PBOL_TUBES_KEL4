@@ -1,0 +1,12 @@
+# Konfigurasi Koneksi Database MySQL
+# Sistem Informasi Manajemen Laundry Kelompok 4
+# Sesuaikan nilai di bawah dengan pengaturan MySQL / Laragon / XAMPP masing-masing
+
+db.host=localhost
+db.port=3306
+db.name=laundry_kelompok4
+db.username=root
+db.password=
+db.useSSL=false
+db.serverTimezone=Asia/Jakarta
+db.allowPublicKeyRetrieval=true
