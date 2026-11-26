@@ -165,13 +165,13 @@ src/main/java/id/kelompok4/laundry/
 ### Langkah 2: Buka Proyek di IntelliJ IDEA
 1. Buka **IntelliJ IDEA**.
 2. Pilih menu **File -> Open...**.
-3. Arahkan ke direktori: `D:\Tubes-PBOL3`.
+3. Arahkan ke folder hasil clone repository ini.
 4. IntelliJ akan secara otomatis mendeteksi file `pom.xml` dan mengunduh / mengaitkan pustaka dependensi (MySQL Connector/J, jBCrypt, FlatLaf).
 
 ### Langkah 3: Periksa Konfigurasi Koneksi (Jika Diperlukan)
-File konfigurasi koneksi berada di:
-`src/main/resources/database.properties` (atau `database/database.properties.example`).
-Pengaturan default telah disesuaikan dengan Laragon:
+Salin `database/database.properties.example` menjadi `database/database.properties`, lalu sesuaikan
+nilainya dengan pengaturan MySQL lokal. File konfigurasi lokal ini tidak dilacak Git agar
+kredensial tiap pengguna tidak ikut terunggah. Pengaturan contoh untuk Laragon:
 ```properties
 db.host=localhost
 db.port=3306
